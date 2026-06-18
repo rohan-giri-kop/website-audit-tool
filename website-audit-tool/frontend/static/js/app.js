@@ -403,10 +403,10 @@ async function bootstrapReport(auditId) {
       screenshot &&
       audit.screenshot_path
   ) {
-      screenshot.src =
-        audit.screenshot_path
-            ? "/" + audit.screenshot_path.replaceAll("\\", "/")
-            : "";
+      console.log("SCREENSHOT PATH =", audit.screenshot_path);
+
+    screenshot.src = audit.screenshot_path.replaceAll("\\", "/");
+
   }
   const perf = audit.performance_metrics || {};
   const security = audit.security_metrics || {};
