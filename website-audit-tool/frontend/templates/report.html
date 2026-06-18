@@ -1,0 +1,357 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<main class="page-wrap container py-5" data-audit-id="{{ audit_id }}">
+
+<div class="row g-4">
+
+    <!-- Report Header -->
+    <div class="col-12">
+        <div class="glass-card p-4 p-md-5 report-hero">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+
+                <div>
+                    <span class="eyebrow">Audit Report</span>
+
+                    <h1 class="display-6 fw-bold mb-2" id="reportUrl">
+                        Loading report...
+                    </h1>
+
+                    <p class="text-muted mb-0" id="reportSummary"></p>
+                </div>
+
+                <div>
+                    <a href="#" class="btn btn-outline-primary" id="downloadPdfBtn">
+                        Download PDF
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- SEO -->
+    <div class="col-lg-2 col-md-4 col-6">
+        <div class="metric-card glass-card score-card">
+            <span>SEO</span>
+
+            <strong id="seoValue">0</strong>
+
+            <div class="progress mt-2">
+                <div class="progress-bar bg-primary"
+                     id="seoBar"
+                     role="progressbar"
+                     style="width:0%">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Performance -->
+    <div class="col-lg-2 col-md-4 col-6">
+        <div class="metric-card glass-card score-card">
+            <span>Performance</span>
+
+            <strong id="performanceValue">0</strong>
+
+            <div class="progress mt-2">
+                <div class="progress-bar bg-success"
+                     id="performanceBar"
+                     role="progressbar"
+                     style="width:0%">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="col-lg-2 col-md-4 col-6">
+        <div class="metric-card glass-card score-card">
+            <span>Accessibility</span>
+
+            <strong id="accessibilityValue">0</strong>
+
+            <div class="progress mt-2">
+                <div class="progress-bar bg-info"
+                     id="accessibilityBar"
+                     role="progressbar"
+                     style="width:0%">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Security -->
+    <div class="col-lg-2 col-md-4 col-6">
+        <div class="metric-card glass-card score-card">
+            <span>Security</span>
+
+            <strong id="securityValue">0</strong>
+
+            <div class="progress mt-2">
+                <div class="progress-bar bg-danger"
+                     id="securityBar"
+                     role="progressbar"
+                     style="width:0%">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-2 col-md-4 col-6">
+        <div class="metric-card glass-card score-card">
+            <span>Mobile</span>
+
+            <strong id="mobileValue">0</strong>
+
+            <div class="progress mt-2">
+                <div class="progress-bar bg-secondary"
+                    id="mobileBar"
+                    role="progressbar"
+                    style="width:0%">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overall -->
+    <div class="col-lg-2 col-md-4 col-6">
+        <div class="metric-card glass-card score-card">
+            <span>Overall</span>
+
+            <strong id="overallValue">0</strong>
+
+            <div class="progress mt-2">
+                <div class="progress-bar bg-warning"
+                     id="overallBar"
+                     role="progressbar"
+                     style="width:0%">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart -->
+    <div class="col-lg-7">
+        <div class="glass-card p-4 h-100">
+            <h2 class="h5 fw-bold mb-3">
+                Score Breakdown
+            </h2>
+
+            <canvas id="reportChart" height="180"></canvas>
+        </div>
+    </div>
+
+    <!-- Website Screenshot -->
+    <div class="col-12">
+        <div class="glass-card p-4">
+
+            <h2 class="h5 fw-bold mb-3">
+                Website Screenshot
+            </h2>
+
+            <div class="text-center">
+
+                <img
+                    id="websiteScreenshot"
+                    src=""
+                    alt="Website Screenshot"
+                    class="img-fluid rounded shadow"
+                    style="max-height:700px; width:auto;">
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Executive Summary -->
+    <div class="col-lg-5">
+        <div class="glass-card p-4 h-100">
+            <h2 class="h5 fw-bold mb-3">
+                Executive Summary
+            </h2>
+
+            <div id="findingStream" class="finding-stream">
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility Details -->
+    <div class="col-12">
+        <div class="glass-card p-4">
+
+            <h2 class="h5 fw-bold mb-3">
+                Accessibility Details
+            </h2>
+
+            <div class="row g-3" id="accessibilityDetails">
+
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+
+                            <h6 class="text-muted">
+                                Missing ALT Images
+                            </h6>
+
+                            <h2 id="missingAltImages">
+                                0
+                            </h2>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+
+                            <h6 class="text-muted">
+                                Unlabeled Inputs
+                            </h6>
+
+                            <h2 id="unlabeledInputs">
+                                0
+                            </h2>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+
+                            <h6 class="text-muted">
+                                ARIA Support
+                            </h6>
+
+                            <h2 id="ariaSupport">
+                                No
+                            </h2>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Security Checks -->
+    <div class="col-12">
+        <div class="glass-card p-4">
+
+            <h2 class="h5 fw-bold mb-3">
+                Security Checks
+            </h2>
+
+            <div id="securityChecksContent">
+
+                <div class="text-muted">
+                    Loading security information...
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Performance Metrics -->
+    <div class="col-12">
+        <div class="glass-card p-4">
+
+            <h2 class="h5 fw-bold mb-3">
+                Performance Metrics
+            </h2>
+
+            <div id="performanceMetrics">
+
+                <div class="text-muted">
+                    Loading performance metrics...
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- UI/UX Findings -->
+
+    <div class="col-12">
+        <div class="glass-card p-4">
+
+            <h2 class="h5 fw-bold mb-3">
+                UI/UX Analysis
+            </h2>
+
+            <div id="uiuxContent">
+
+                <div class="text-muted">
+                    Loading UI/UX information...
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Findings -->
+<!-- AI Recommendations -->
+
+<div class="col-12">
+    <div class="glass-card p-4">
+
+        <h2 class="h5 fw-bold mb-3">
+            AI Recommendations
+        </h2>
+
+        <div id="aiRecommendations">
+
+            <div class="text-muted">
+                Loading recommendations...
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- Findings & Recommendations -->
+
+<div class="col-12">
+    <div class="glass-card p-4">
+
+        <h2 class="h5 fw-bold mb-3">
+            Findings & Recommendations
+        </h2>
+
+        <div class="table-responsive">
+
+            <table class="table table-hover audit-table">
+
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Issue</th>
+                        <th>Recommendation</th>
+                        <th>Priority</th>
+                    </tr>
+                </thead>
+
+                <tbody id="findingsTable">
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+</main>
+{% endblock %}

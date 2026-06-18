@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block body %}
+<main class="page-wrap container py-5">
+  <div class="glass-card p-4 p-md-5">
+    <h1 class="h3 fw-bold mb-3">Audit History</h1>
+    <div class="table-responsive">
+      <table class="table audit-table mb-0">
+        <thead><tr><th>Website</th><th>SEO</th><th>Performance</th><th>Security</th><th>Overall</th><th>Grade</th><th>Date</th><th></th></tr></thead>
+        <tbody id="historyTable"></tbody>
+      </table>
+    </div>
+  </div>
+</main>
+{% endblock %}

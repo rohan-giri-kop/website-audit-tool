@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block body %}
+{% include 'partials/navbar.html' %}
+<main class="hero-wrap">
+  <section class="hero-section container pt-5">
+    <div class="row align-items-center min-vh-100 py-5">
+      <div class="col-lg-7" data-aos="fade-up">
+        <span class="badge rounded-pill bg-light text-dark mb-3 px-3 py-2 shadow-sm">AI-powered website audits</span>
+        <h1 class="display-3 fw-black text-white mb-3">Analyze Any Website in Seconds</h1>
+        <p class="lead text-white-50 mb-4">Get SEO, Performance, Security, Accessibility, and Mobile Audit Reports Powered by AI.</p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="/dashboard" class="btn btn-primary btn-lg px-4">Launch Dashboard</a>
+          <a href="/register" class="btn btn-outline-light btn-lg px-4">Create Account</a>
+        </div>
+        <div class="hero-stats mt-5 row g-3">
+          <div class="col-sm-4"><div class="stat-card"><strong>99+</strong><span>Signals checked</span></div></div>
+          <div class="col-sm-4"><div class="stat-card"><strong>5</strong><span>Audit categories</span></div></div>
+          <div class="col-sm-4"><div class="stat-card"><strong>PDF</strong><span>Export ready</span></div></div>
+        </div>
+      </div>
+      <div class="col-lg-5 mt-5 mt-lg-0" data-aos="fade-left">
+        <div class="hero-card glass-card p-4 p-md-5">
+          <h2 class="h4 text-white mb-4">Run a demo audit</h2>
+          <form id="demoAuditForm" class="d-grid gap-3">
+            <input type="url" class="form-control form-control-lg" id="websiteUrl" placeholder="https://example.com" value="https://example.com" required>
+            <button class="btn btn-primary btn-lg" type="submit">Analyze Website</button>
+          </form>
+          <div class="loading-skeleton d-none mt-4" id="heroLoader">
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line short"></div>
+          </div>
+          <div class="mt-4 text-white-50 small">This demo route connects to the full audit API once you sign in.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container py-5">
+    <div class="section-heading text-center mb-5" data-aos="fade-up">
+      <span class="eyebrow">Platform Features</span>
+      <h2 class="fw-bold">Everything needed for a polished website audit workflow</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4" data-aos="fade-up"><div class="feature-card glass-card h-100"><i class="bi bi-speedometer2"></i><h3>Performance</h3><p>Core Web Vitals, Lighthouse metrics, and action-focused optimization guidance.</p></div></div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100"><div class="feature-card glass-card h-100"><i class="bi bi-search"></i><h3>SEO</h3><p>Title tags, meta data, structured data, internal linking, and broken link checks.</p></div></div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200"><div class="feature-card glass-card h-100"><i class="bi bi-shield-check"></i><h3>Security</h3><p>HTTPS, headers, CSP, HSTS, X-Frame-Options, and risk-prioritized remediation.</p></div></div>
+    </div>
+  </section>
+
+  <section class="container py-5">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-6" data-aos="fade-right">
+        <div class="glass-card p-4 p-md-5">
+          <h3 class="fw-bold mb-3">How it works</h3>
+          <div class="steps">
+            <div class="step-item"><span>1</span><div><strong>Enter a URL</strong><p>Paste the website you want to review.</p></div></div>
+            <div class="step-item"><span>2</span><div><strong>Run the audit</strong><p>The backend fetches page data, runs checks, and collects metrics.</p></div></div>
+            <div class="step-item"><span>3</span><div><strong>Download the report</strong><p>Review the dashboard or export a polished PDF summary.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6" data-aos="fade-left">
+        <div class="glass-card p-4 p-md-5">
+          <h3 class="fw-bold mb-3">Trusted dashboard design</h3>
+          <p class="text-muted mb-0">Built for a premium SaaS feel with glassmorphism, rounded cards, smooth gradients, and responsive layouts across desktop and mobile.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% include 'partials/footer.html' %}
+{% endblock %}

@@ -1,0 +1,314 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<main class="container py-5">
+
+    <div class="mb-4">
+        <h1 class="fw-bold">Settings</h1>
+        <p class="text-muted">
+            Manage your account preferences and security.
+        </p>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Account -->
+        <div class="col-lg-6">
+
+            <div class="card settings-card">
+
+                <div class="card-body">
+
+                    <h5 class="mb-3">
+                        Account Information
+                    </h5>
+
+                    <div class="mb-3">
+                        <label class="form-label">
+                            Full Name
+                        </label>
+                        <input
+                            id="settingsName"
+                            class="form-control"
+                            readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">
+                            Email
+                        </label>
+                        <input
+                            id="settingsEmail"
+                            class="form-control"
+                            readonly>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Password -->
+        <div class="col-lg-6">
+
+            <div class="card settings-card">
+
+                <div class="card-body">
+
+                    <h5 class="mb-3">
+                        Change Password
+                    </h5>
+
+                    <form id="changePasswordForm">
+
+                        <div class="mb-3">
+                            <input
+                                type="password"
+                                class="form-control"
+                                placeholder="Current Password">
+                        </div>
+
+                        <div class="mb-3">
+                            <input
+                                type="password"
+                                class="form-control"
+                                placeholder="New Password">
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary">
+                            Update Password
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Preferences -->
+
+        <div class="col-lg-6">
+
+            <div class="card settings-card">
+
+                <div class="card-body">
+
+                    <h5 class="mb-3">
+                        Audit Preferences
+                    </h5>
+
+                    <div class="form-check form-switch mb-3">
+
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            checked>
+
+                        <label class="form-check-label">
+                            Run SEO Analysis
+                        </label>
+
+                    </div>
+
+                    <div class="form-check form-switch mb-3">
+
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            checked>
+
+                        <label class="form-check-label">
+                            Run Security Scan
+                        </label>
+
+                    </div>
+
+                    <div class="form-check form-switch">
+
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            checked>
+
+                        <label class="form-check-label">
+                            Run Accessibility Scan
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Notifications -->
+
+        <div class="col-lg-6">
+
+            <div class="card settings-card">
+
+                <div class="card-body">
+
+                    <h5 class="mb-3">
+                        Notifications
+                    </h5>
+
+                    <div class="form-check form-switch mb-3">
+
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            checked>
+
+                        <label class="form-check-label">
+                            Email Audit Reports
+                        </label>
+
+                    </div>
+
+                    <div class="form-check form-switch">
+
+                        <input
+                            class="form-check-input"
+                            type="checkbox">
+
+                        <label class="form-check-label">
+                            Weekly Summary
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Personalization -->
+
+<div class="col-lg-6">
+
+    <div class="card settings-card">
+
+        <div class="card-body">
+
+            <h5 class="mb-3">
+                Personalization
+            </h5>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Theme
+                </label>
+
+                <select
+                    id="themeSelect"
+                    class="form-select">
+
+                    <option value="light">
+                        Light
+                    </option>
+
+                    <option value="dark">
+                        Dark
+                    </option>
+
+                    <option value="system">
+                        System Default
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Default Report Format
+                </label>
+
+                <select
+                    id="reportFormat"
+                    class="form-select">
+
+                    <option value="pdf">
+                        PDF
+                    </option>
+
+                    <option value="html">
+                        HTML
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Default Website URL
+                </label>
+
+                <input
+                    id="defaultUrl"
+                    type="text"
+                    class="form-control"
+                    placeholder="https://example.com">
+
+            </div>
+
+            <button
+                id="savePreferencesBtn"
+                class="btn btn-primary">
+
+                Save Preferences
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+        <!-- Logout -->
+
+        <div class="col-12">
+
+            <div class="card border-danger">
+
+                <div class="card-body">
+
+                    <h5 class="text-danger">
+                        Danger Zone
+                    </h5>
+
+                    <p class="text-muted">
+                        Logout from your account.
+                    </p>
+
+                    <button
+                        id="logoutBtn"
+                        class="btn btn-danger">
+                        Logout
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+{% endblock %}

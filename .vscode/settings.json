@@ -1,0 +1,26 @@
+{
+  "cSpell.words": [
+    "acessibility",
+    "autoflush",
+    "BOTTOMPADDING",
+    "dotenv",
+    "FONTNAME",
+    "FONTSIZE",
+    "genai",
+    "generativeai",
+    "Giri",
+    "hsts",
+    "KHTML",
+    "labelledby",
+    "networkidle",
+    "pagesizes",
+    "progressbar",
+    "Rohan",
+    "ROWBACKGROUNDS",
+    "sessionmaker",
+    "stylesheet",
+    "TEXTCOLOR",
+    "uiux"
+  ],
+  "python-envs.defaultEnvManager": "ms-python.python:system"
+}

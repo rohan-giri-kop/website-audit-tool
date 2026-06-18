@@ -1,0 +1,7 @@
+<svg width="160" height="48" viewBox="0 0 160 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="48" height="48" rx="16" fill="#2563EB"/>
+  <circle cx="24" cy="24" r="13" fill="#7C3AED" opacity="0.96"/>
+  <path d="M68 15H76C81.5228 15 86 19.4772 86 25C86 30.5228 81.5228 35 76 35H68V15Z" fill="#0F172A"/>
+  <path d="M68 15H76C81.5228 15 86 19.4772 86 25C86 30.5228 81.5228 35 76 35H68V15Z" fill="#FFFFFF" opacity="0.18"/>
+  <text x="92" y="30" fill="#0F172A" font-family="Arial, sans-serif" font-size="18" font-weight="700">AI Audit</text>
+</svg>
