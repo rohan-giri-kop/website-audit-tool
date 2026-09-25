@@ -1,73 +1,2369 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% block head %}
+<link rel="stylesheet" href="/static/css/index.css">
+{% endblock %}
 {% block body %}
-{% include 'partials/navbar.html' %}
-<main class="hero-wrap">
-  <section class="hero-section container pt-5">
-    <div class="row align-items-center min-vh-100 py-5">
-      <div class="col-lg-7" data-aos="fade-up">
-        <span class="badge rounded-pill bg-light text-dark mb-3 px-3 py-2 shadow-sm">AI-powered website audits</span>
-        <h1 class="display-3 fw-black text-white mb-3">Analyze Any Website in Seconds</h1>
-        <p class="lead text-white-50 mb-4">Get SEO, Performance, Security, Accessibility, and Mobile Audit Reports Powered by AI.</p>
-        <div class="d-flex flex-wrap gap-3">
-          <a href="/dashboard" class="btn btn-primary btn-lg px-4">Launch Dashboard</a>
-          <a href="/register" class="btn btn-outline-light btn-lg px-4">Create Account</a>
-        </div>
-        <div class="hero-stats mt-5 row g-3">
-          <div class="col-sm-4"><div class="stat-card"><strong>99+</strong><span>Signals checked</span></div></div>
-          <div class="col-sm-4"><div class="stat-card"><strong>5</strong><span>Audit categories</span></div></div>
-          <div class="col-sm-4"><div class="stat-card"><strong>PDF</strong><span>Export ready</span></div></div>
-        </div>
-      </div>
-      <div class="col-lg-5 mt-5 mt-lg-0" data-aos="fade-left">
-        <div class="hero-card glass-card p-4 p-md-5">
-          <h2 class="h4 text-white mb-4">Run a demo audit</h2>
-          <form id="demoAuditForm" class="d-grid gap-3">
-            <input type="url" class="form-control form-control-lg" id="websiteUrl" placeholder="https://example.com" value="https://example.com" required>
-            <button class="btn btn-primary btn-lg" type="submit">Analyze Website</button>
-          </form>
-          <div class="loading-skeleton d-none mt-4" id="heroLoader">
-            <div class="skeleton-line"></div>
-            <div class="skeleton-line"></div>
-            <div class="skeleton-line short"></div>
-          </div>
-          <div class="mt-4 text-white-50 small">This demo route connects to the full audit API once you sign in.</div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <section class="container py-5">
-    <div class="section-heading text-center mb-5" data-aos="fade-up">
-      <span class="eyebrow">Platform Features</span>
-      <h2 class="fw-bold">Everything needed for a polished website audit workflow</h2>
-    </div>
-    <div class="row g-4">
-      <div class="col-md-4" data-aos="fade-up"><div class="feature-card glass-card h-100"><i class="bi bi-speedometer2"></i><h3>Performance</h3><p>Core Web Vitals, Lighthouse metrics, and action-focused optimization guidance.</p></div></div>
-      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100"><div class="feature-card glass-card h-100"><i class="bi bi-search"></i><h3>SEO</h3><p>Title tags, meta data, structured data, internal linking, and broken link checks.</p></div></div>
-      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200"><div class="feature-card glass-card h-100"><i class="bi bi-shield-check"></i><h3>Security</h3><p>HTTPS, headers, CSP, HSTS, X-Frame-Options, and risk-prioritized remediation.</p></div></div>
-    </div>
-  </section>
+<!-- =========================
+        Navbar
+========================= -->
+{% include "partials/navbar.html" %}
 
-  <section class="container py-5">
-    <div class="row align-items-center g-4">
-      <div class="col-lg-6" data-aos="fade-right">
-        <div class="glass-card p-4 p-md-5">
-          <h3 class="fw-bold mb-3">How it works</h3>
-          <div class="steps">
-            <div class="step-item"><span>1</span><div><strong>Enter a URL</strong><p>Paste the website you want to review.</p></div></div>
-            <div class="step-item"><span>2</span><div><strong>Run the audit</strong><p>The backend fetches page data, runs checks, and collects metrics.</p></div></div>
-            <div class="step-item"><span>3</span><div><strong>Download the report</strong><p>Review the dashboard or export a polished PDF summary.</p></div></div>
-          </div>
+
+<main class="home-page">
+    <!-- =========================
+            Hero Section
+    ========================= -->
+    <section id="home" class="hero-section">
+
+        <div class="container">
+
+            <div class="row align-items-start g-5">
+
+                <!-- LEFT -->
+                <div class="col-lg-6">
+
+                    <span class="hero-badge">
+                        <i class="bi bi-stars"></i>
+                        AI Website Intelligence
+                    </span>
+
+                    <h1 class="hero-title">
+                        Analyze Your Website
+                        <span>With AI</span>
+                        In Seconds
+                    </h1>
+
+                    <p class="hero-description">
+                        Professional website audits covering SEO,
+                        Performance, Accessibility,
+                        Security and AI Recommendations.
+                    </p>
+
+                    <form class="hero-search">
+
+                        <input
+                            type="url"
+                            placeholder="https://yourwebsite.com">
+
+                        <button>
+
+                            <i class="bi bi-rocket-takeoff"></i>
+
+                            Run Free Audit
+
+                        </button>
+
+                    </form>
+
+                    <div class="hero-features">
+
+                        <span>
+                            <i class="bi bi-check-circle-fill"></i>
+                            99+ Checks
+                        </span>
+
+                        <span>
+                            <i class="bi bi-lightning-charge-fill"></i>
+                            30 Seconds
+                        </span>
+
+                        <span>
+                            <i class="bi bi-file-earmark-pdf-fill"></i>
+                            PDF Report
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <!-- RIGHT -->
+
+                <div class="col-lg-6">
+
+                    <div class="dashboard-preview">
+
+                        <!-- Dashboard Header -->
+                        <div class="dashboard-header">
+
+                            <div>
+
+                                <h4 class="dashboard-title">
+                                    Website Health
+                                </h4>
+
+                                <p class="dashboard-subtitle">
+                                    AI Audit Summary
+                                </p>
+
+                            </div>
+
+                            <i class="bi bi-stars fs-4 text-primary"></i>
+
+                        </div>
+
+                        <!-- Score Circle -->
+                        <div class="score-circle">
+
+                            <span>94</span>
+
+                            <small>/100</small>
+
+                        </div>
+
+                        <!-- Score List -->
+
+                        <div class="score-list">
+
+                            <!-- SEO -->
+                            <div class="metric">
+
+                                <div class="metric-title">
+                                    <span>SEO</span>
+                                    <strong>96</strong>
+                                </div>
+
+                                <div class="metric-bar">
+                                    <div class="metric-fill" style="width:96%;"></div>
+                                </div>
+
+                            </div>
+
+                            <!-- Performance -->
+                            <div class="metric">
+
+                                <div class="metric-title">
+                                    <span>Performance</span>
+                                    <strong>91</strong>
+                                </div>
+
+                                <div class="metric-bar">
+                                    <div class="metric-fill" style="width:91%;"></div>
+                                </div>
+
+                            </div>
+
+                            <!-- Accessibility -->
+                            <div class="metric">
+
+                                <div class="metric-title">
+                                    <span>Accessibility</span>
+                                    <strong>95</strong>
+                                </div>
+
+                                <div class="metric-bar">
+                                    <div class="metric-fill" style="width:95%;"></div>
+                                </div>
+
+                            </div>
+
+                            <!-- Security -->
+                            <div class="metric">
+
+                                <div class="metric-title">
+                                    <span>Security</span>
+                                    <strong>98</strong>
+                                </div>
+
+                                <div class="metric-bar">
+                                    <div class="metric-fill" style="width:98%;"></div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- AI Recommendation -->
+
+                        <div class="ai-card">
+
+                            <h5>
+
+                                <i class="bi bi-robot me-2"></i>
+
+                                AI Recommendation
+
+                            </h5>
+
+                            <p>
+
+                                Your website is performing well.
+                                Compress images, enable caching,
+                                and add structured data to reach
+                                a 100/100 health score.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-      </div>
-      <div class="col-lg-6" data-aos="fade-left">
-        <div class="glass-card p-4 p-md-5">
-          <h3 class="fw-bold mb-3">Trusted dashboard design</h3>
-          <p class="text-muted mb-0">Built for a premium SaaS feel with glassmorphism, rounded cards, smooth gradients, and responsive layouts across desktop and mobile.</p>
+
+    </section>
+
+    <!-- ======================================
+            Trusted Technologies
+    ======================================= -->
+    <section class="trusted-section">
+
+        <div class="container">
+
+            <div class="trusted-wrapper">
+
+                <div class="text-center mb-5">
+
+                    <span class="section-tag">
+                        Trusted Technology Stack
+                    </span>
+
+                    <h2 class="section-title">
+                        Powered by Industry-Leading Technologies
+                    </h2>
+
+                    <p class="section-description">
+                        Built using modern technologies that power fast,
+                        secure and intelligent website analysis with
+                        AI-driven recommendations.
+                    </p>
+
+                </div>
+
+                <div class="trusted-grid">
+
+                    <div class="trusted-card">
+                        <div class="trusted-logo">
+                            <img src="/static/images/logos/python.svg" alt="Python">
+                        </div> 
+                        <h5>Python</h5>
+                    </div>
+
+                    <div class="trusted-card">
+                        <div class="trusted-logo">
+                            <img src="/static/images/logos/fastapi.svg" alt="FastAPI">
+                        </div> 
+                        <h5>FastAPI</h5>
+                    </div>
+
+                    <div class="trusted-card">
+                        <div class="trusted-logo">
+                            <img src="/static/images/logos/bootstrap.svg" alt="Bootstrap">
+                        </div> 
+                        <h5>Bootstrap</h5>
+                    </div>
+
+                    <div class="trusted-card">
+                        <div class="trusted-logo">
+                            <img src="/static/images/logos/sqlite.svg" alt="SQLite">
+                        </div> 
+                        <h5>SQLite</h5>
+                    </div>
+
+                    <div class="trusted-card">
+                        <div class="trusted-logo">
+                            <img src="/static/images/logos/lighthouse.svg" alt="Lighthouse">
+                        </div> 
+                        <h5>Lighthouse</h5>
+                    </div>
+
+                    <div class="trusted-card">
+                        <div class="trusted-logo">
+                            <img src="/static/images/logos/gemini.svg" alt="AI">
+                        </div> 
+                        <h5>Gemini</h5>
+                    </div>    
+                </div>
+
+            </div>
+
         </div>
-      </div>
+
+    </section>
+
+    <!-- ===========================================
+                    FEATURES SECTION
+    =========================================== -->
+
+    <section id="features" class="features-section">
+
+        <div class="container">
+
+            <div class="text-center">
+
+                <span class="section-tag">
+                    Powerful Features
+                </span>
+
+                <h2 class="section-title">
+                    Everything You Need for a Complete Website Audit
+                </h2>
+
+                <p class="section-description">
+                    Analyze every important aspect of your website using AI-powered
+                    tools and industry-standard technologies.
+                </p>
+
+            </div>
+
+            <div class="features-grid">
+
+                <!-- SEO -->
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        <i class="bi bi-search"></i>
+                    </div>
+
+                    <h4>SEO Audit</h4>
+
+                    <p>
+                        Detect missing meta tags, headings, image ALT text,
+                        structured data and SEO issues.
+                    </p>
+
+                </div>
+
+                <!-- Performance -->
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        <i class="bi bi-speedometer2"></i>
+                    </div>
+
+                    <h4>Performance</h4>
+
+                    <p>
+                        Measure Core Web Vitals, Lighthouse metrics,
+                        loading speed and optimization opportunities.
+                    </p>
+
+                </div>
+
+                <!-- Security -->
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+
+                    <h4>Security</h4>
+
+                    <p>
+                        Scan HTTPS configuration, security headers
+                        and identify potential website risks.
+                    </p>
+
+                </div>
+
+                <!-- Accessibility -->
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        <i class="bi bi-universal-access"></i>
+                    </div>
+
+                    <h4>Accessibility</h4>
+
+                    <p>
+                        Improve usability with accessibility checks
+                        following modern web standards.
+                    </p>
+
+                </div>
+
+                <!-- AI -->
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        <i class="bi bi-stars"></i>
+                    </div>
+
+                    <h4>AI Recommendations</h4>
+
+                    <p>
+                        Receive intelligent suggestions powered by
+                        Google Gemini AI.
+                    </p>
+
+                </div>
+
+                <!-- PDF -->
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        <i class="bi bi-file-earmark-pdf"></i>
+                    </div>
+
+                    <h4>PDF Reports</h4>
+
+                    <p>
+                        Download professional audit reports
+                        with scores, charts and recommendations.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+<!-- ==========================================
+        HOW IT WORKS
+=========================================== -->
+
+<section id="how-it-works" class="workflow-section">
+
+    <div class="container">
+
+        <!-- Section Header -->
+
+        <div class="workflow-header text-center">
+
+            <span class="section-tag">
+                <i class="bi bi-stars"></i>
+                AI Powered Workflow
+            </span>
+
+            <h2 class="section-title">
+                How Our AI Website Audit Works
+            </h2>
+
+            <p class="section-description">
+
+                Analyze any website in under
+                <strong>30 seconds</strong> using AI,
+                Lighthouse, Security analysis and
+                Performance checks.
+
+            </p>
+
+        </div>
+
+        <!-- Workflow -->
+
+        <div class="workflow-wrapper">
+
+            <!-- Vertical Line -->
+
+            <div class="workflow-line"></div>
+
+            <!-- STEP 1 -->
+
+            <div class="workflow-item left">
+
+                <div class="step-circle">
+
+                    01
+
+                </div>
+
+                <div class="workflow-card">
+
+                    <div class="workflow-icon">
+
+                        <i class="bi bi-globe2"></i>
+
+                    </div>
+
+                    <div class="workflow-content">
+
+                        <span class="workflow-label">
+
+                            Start Here
+
+                        </span>
+
+                        <h3>
+
+                            Enter Website URL
+
+                        </h3>
+
+                        <p>
+
+                            Simply paste any public website URL
+                            and our AI engine instantly prepares
+                            the audit.
+
+                        </p>
+
+                        <ul>
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i>
+                                HTTPS Validation
+                            </li>
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Domain Verification
+                            </li>
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Instant Scan
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- STEP 2 -->
+
+            <div class="workflow-item right">
+
+                <div class="step-circle">
+
+                    02
+
+                </div>
+
+                <div class="workflow-card">
+
+                    <div class="workflow-icon ai">
+
+                        <i class="bi bi-cpu-fill"></i>
+
+                    </div>
+
+                    <div class="workflow-content">
+
+                        <span class="workflow-label">
+
+                            AI Processing
+
+                        </span>
+
+                        <h3>
+
+                            AI Website Analysis
+
+                        </h3>
+
+                        <p>
+
+                            Our intelligent engine performs
+                            comprehensive analysis using
+                            Lighthouse and AI models.
+
+                        </p>
+
+                        <ul>
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i>
+                                SEO Audit
+                            </li>
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Accessibility
+                            </li>
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Performance Metrics
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- STEP 3 -->
+
+            <div class="workflow-item left">
+
+                <div class="step-circle">
+
+                    03
+
+                </div>
+
+                <div class="workflow-card">
+
+                    <div class="workflow-icon report">
+
+                        <i class="bi bi-file-earmark-bar-graph-fill"></i>
+
+                    </div>
+
+                    <div class="workflow-content">
+
+                        <span class="workflow-label">
+
+                            Smart Report
+
+                        </span>
+
+                        <h3>
+
+                            Professional Audit Report
+
+                        </h3>
+
+                        <p>
+
+                            Receive a beautiful dashboard
+                            including charts, screenshots,
+                            scores and recommendations.
+
+                        </p>
+
+                        <ul>
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Interactive Dashboard
+                            </li>
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i>
+                                PDF Export
+                            </li>
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Website Screenshot
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- STEP 4 -->
+
+            <div class="workflow-item right">
+
+                <div class="step-circle gold">
+
+                    04
+
+                </div>
+
+                <div class="workflow-card">
+
+                    <div class="workflow-icon rocket">
+
+                        <i class="bi bi-rocket-takeoff-fill"></i>
+
+                    </div>
+
+                    <div class="workflow-content">
+
+                        <span class="workflow-label">
+
+                            Grow Faster
+
+                        </span>
+
+                        <h3>
+
+                            Improve Your Website
+
+                        </h3>
+
+                        <p>
+
+                            Follow AI-generated suggestions
+                            to improve SEO, speed,
+                            accessibility and security.
+
+                        </p>
+
+                        <ul>
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Better Rankings
+                            </li>
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Faster Website
+                            </li>
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Higher User Experience
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
-  </section>
+
+</section>
+
+    <!-- ===========================================
+                REPORTS SECTION
+    =========================================== -->
+
+    <section id="reports" class="reports-section">
+
+        <div class="container">
+
+            <div class="text-center">
+
+                <span class="section-tag">
+                    Professional Reports
+                </span>
+
+                <h2 class="section-title">
+                    Beautiful Reports.<br>
+                    Actionable Insights.
+                </h2>
+
+                <p class="section-description">
+                    Every audit generates a premium report with charts,
+                    scores, screenshots and AI-powered recommendations.
+                </p>
+
+            </div>
+
+            <div class="reports-grid">
+
+                <!-- LEFT -->
+
+                <div class="reports-content">
+
+                    <div class="report-item">
+
+                        <i class="bi bi-file-earmark-text"></i>
+
+                        <div>
+
+                            <h5>Executive Summary</h5>
+
+                            <p>Quick overview of your website health.</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="report-item">
+
+                        <i class="bi bi-speedometer2"></i>
+
+                        <div>
+
+                            <h5>Performance Metrics</h5>
+
+                            <p>Core Web Vitals & Lighthouse scores.</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="report-item">
+
+                        <i class="bi bi-search"></i>
+
+                        <div>
+
+                            <h5>SEO Analysis</h5>
+
+                            <p>Meta tags, headings and indexing checks.</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="report-item">
+
+                        <i class="bi bi-shield-check"></i>
+
+                        <div>
+
+                            <h5>Security Scan</h5>
+
+                            <p>HTTPS and security headers analysis.</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="report-item">
+
+                        <i class="bi bi-stars"></i>
+
+                        <div>
+
+                            <h5>AI Recommendations</h5>
+
+                            <p>Smart suggestions generated by AI.</p>
+
+                        </div>
+
+                    </div>
+
+                    <a href="#" class="btn-primary mt-4">
+
+                        View Sample Report
+
+                    </a>
+
+                </div>
+
+                <!-- RIGHT -->
+
+                <div class="laptop-wrapper">
+
+                    <div class="laptop">
+
+                        <div class="laptop-screen">
+
+                            
+
+                            <div class="report-scroll">
+
+                                <div class="report-screen" id="reportScreen">
+
+                                <!-- Header -->
+
+                                <div class="report-header">
+
+                                    <div class="report-brand">
+
+                                        <div class="report-logo">
+                                            <i class="bi bi-shield-check"></i>
+                                        </div>
+
+                                        <div>
+
+                                            <small>Audit Overview</small>
+
+                                            <h5>https://www.google.com</h5>
+
+                                            <span>Audited • July 17, 2026 • 03:48 PM</span>
+
+                                        </div>
+
+                                    </div>
+
+                                    <button class="download-btn">
+
+                                        <i class="bi bi-download"></i>
+
+                                        Download PDF
+
+                                    </button>
+
+                                </div>
+
+
+
+                                <!-- Scores -->
+
+                                <div class="mini-scores">
+
+                                    <div class="mini-card seo">
+                                        <small>SEO</small>
+                                        <h4>96</h4>
+                                        <div class="line blue"></div>
+                                    </div>
+
+                                    <div class="mini-card performance">
+                                        <small>Performance</small>
+                                        <h4>91</h4>
+                                        <div class="line green"></div>
+                                    </div>
+
+                                    <div class="mini-card accessibility">
+                                        <small>Accessibility</small>
+                                        <h4>95</h4>
+                                        <div class="line cyan"></div>
+                                    </div>
+
+                                    <div class="mini-card security">
+                                        <small>Security</small>
+                                        <h4>98</h4>
+                                        <div class="line red"></div>
+                                    </div>
+
+                                    <div class="mini-card best">
+                                        <small>Best Practice</small>
+                                        <h4>100</h4>
+                                        <div class="line purple"></div>
+                                    </div>
+
+                                    <div class="mini-card overall">
+                                        <small>Overall</small>
+                                        <h4>94</h4>
+                                        <div class="line orange"></div>
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- Charts -->
+
+                                <div class="report-grid">
+
+                                    <div class="report-box">
+
+                                        <h4>Score Breakdown</h4>
+
+                                        <div class="chart-container">
+
+                                            <canvas id="sampleRadar"></canvas>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="report-card screenshot-card">
+
+                                        <h5 class="card-title">Website Screenshot</h5>
+
+                                        <div class="browser-window">
+
+                                            <div class="browser-header">
+
+                                                <div class="browser-buttons">
+                                                    <span class="red"></span>
+                                                    <span class="yellow"></span>
+                                                    <span class="green"></span>
+                                                </div>
+
+                                            <div class="browser-address">
+
+                                            <i class="bi bi-shield-lock-fill text-success"></i>
+
+                                            <span>https://www.google.com</span>
+
+                                            <i class="bi bi-arrow-repeat ms-auto"></i>
+
+                                            </div>
+                                            </div>
+
+                                            <div class="browser-body">
+
+                                                <img src="/static/images/screenshots/google.png"
+                                                    alt="Website Screenshot"
+                                                    class="website-image">
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- Summary -->
+
+                                <div class="report-grid">
+
+                                    <div class="report-box">
+
+                                        <h6>Executive Summary</h6>
+
+                                        <ul class="summary-list">
+
+                                            <li>SEO Score <strong>96</strong></li>
+
+                                            <li>Performance <strong>91</strong></li>
+
+                                            <li>Accessibility <strong>95</strong></li>
+
+                                            <li>Security <strong>98</strong></li>
+
+                                        </ul>
+
+                                    </div>
+
+
+
+                                    <div class="report-box">
+
+                                        <h6>Performance Metrics</h6>
+
+                                        <div class="metrics-grid">
+
+                                            <div>FCP<br><strong>0.8 s</strong></div>
+
+                                            <div>LCP<br><strong>1.2 s</strong></div>
+
+                                            <div>Speed<br><strong>1.4</strong></div>
+
+                                            <div>TTI<br><strong>1.6 s</strong></div>
+
+                                            <div>TBT<br><strong>120 ms</strong></div>
+
+                                            <div>CLS<br><strong>0.02</strong></div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- Recommendations -->
+
+                                <div class="report-box">
+
+                                    <h6>AI Recommendations</h6>
+
+                                    <div class="recommendation warning">
+                                        Optimize images to improve page speed.
+                                    </div>
+
+                                    <div class="recommendation info">
+                                        Add meta descriptions.
+                                    </div>
+
+                                    <div class="recommendation success">
+                                        HTTPS configured correctly.
+                                    </div>
+
+                                    <div class="recommendation primary">
+                                        Compress CSS and JavaScript.
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- Findings -->
+
+                                <div class="report-box">
+
+                                    <h6>Findings & Recommendations</h6>
+
+                                    <table class="report-table">
+
+                                        <tr>
+
+                                            <th>Category</th>
+
+                                            <th>Status</th>
+
+                                        </tr>
+
+                                        <tr>
+
+                                            <td>SEO</td>
+
+                                            <td><span class="badge bg-success">Pass</span></td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                            <td>Performance</td>
+
+                                            <td><span class="badge bg-warning">Improve</span></td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                            <td>Security</td>
+
+                                            <td><span class="badge bg-success">Pass</span></td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                            <td>Accessibility</td>
+
+                                            <td><span class="badge bg-info">Good</span></td>
+
+                                        </tr>
+
+                                    </table>
+
+                                </div>
+
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="laptop-bottom"></div>
+
+                        <div class="laptop-shadow"></div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+<!-- ===================================================
+                WHY CHOOSE AI AUDIT
+==================================================== -->
+
+<section id="why-choose" class="why-section">
+
+    <!-- Background Decorations -->
+    <div class="why-bg-circle circle-1"></div>
+    <div class="why-bg-circle circle-2"></div>
+    <div class="why-bg-grid"></div>
+
+    <div class="container">
+
+        <!-- =========================
+                SECTION HEADER
+        ========================== -->
+
+        <div class="why-header text-center">
+
+            <span class="section-tag">
+                <i class="bi bi-stars"></i>
+                Why Choose AI Audit
+            </span>
+
+            <h2 class="section-title">
+
+                Smarter Website Audits.
+                <span>Powered by AI.</span>
+
+            </h2>
+
+            <p class="section-description">
+
+                Analyze every important aspect of your website using
+                AI, Google Lighthouse and modern web standards.
+                Get professional reports in seconds.
+
+            </p>
+
+        </div>
+
+        <!-- =========================
+                STATS
+        ========================== -->
+
+        <div class="why-stats">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="bi bi-search"></i>
+                </div>
+
+                <h3>99+</h3>
+
+                <p>Audit Checks</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="bi bi-lightning-charge-fill"></i>
+                </div>
+
+                <h3>&lt;30s</h3>
+
+                <p>Average Scan</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="bi bi-grid"></i>
+                </div>
+
+                <h3>6</h3>
+
+                <p>Audit Categories</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="bi bi-file-earmark-pdf"></i>
+                </div>
+
+                <h3>PDF</h3>
+
+                <p>Professional Reports</p>
+
+            </div>
+
+        </div>
+
+        <!-- =========================
+                FEATURE GRID
+        ========================== -->
+
+        <div class="feature-grid">
+
+            <!-- CARD 1 -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon ai">
+
+                    <i class="bi bi-stars"></i>
+
+                </div>
+
+                <h3>
+
+                    AI Recommendations
+
+                </h3>
+
+                <p>
+
+                    Receive personalized suggestions to improve
+                    SEO, accessibility, performance and user
+                    experience.
+
+                </p>
+
+                <ul>
+
+                    <li>SEO Optimization</li>
+
+                    <li>Performance Tips</li>
+
+                    <li>UX Improvements</li>
+
+                </ul>
+
+            </div>
+
+            <!-- CARD 2 -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon speed">
+
+                    <i class="bi bi-lightning-charge-fill"></i>
+
+                </div>
+
+                <h3>
+
+                    Lightning Fast
+
+                </h3>
+
+                <p>
+
+                    Complete website analysis in under
+                    30 seconds using automated auditing.
+
+                </p>
+
+                <ul>
+
+                    <li>Instant Scan</li>
+
+                    <li>Fast Processing</li>
+
+                    <li>Cloud Powered</li>
+
+                </ul>
+
+            </div>
+
+            <!-- CARD 3 -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon performance">
+
+                    <i class="bi bi-speedometer2"></i>
+
+                </div>
+
+                <h3>
+
+                    Performance Analysis
+
+                </h3>
+
+                <p>
+
+                    Measure Core Web Vitals with
+                    Google Lighthouse.
+
+                </p>
+
+                <ul>
+
+                    <li>LCP</li>
+
+                    <li>CLS</li>
+
+                    <li>Speed Index</li>
+
+                </ul>
+
+            </div>
+
+            <!-- CARD 4 -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon security">
+
+                    <i class="bi bi-shield-check"></i>
+
+                </div>
+
+                <h3>
+
+                    Security Analysis
+
+                </h3>
+
+                <p>
+
+                    Verify HTTPS, SSL certificates
+                    and security best practices.
+
+                </p>
+
+                <ul>
+
+                    <li>SSL</li>
+
+                    <li>HTTPS</li>
+
+                    <li>Headers</li>
+
+                </ul>
+
+            </div>
+
+            <!-- CARD 5 -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon report">
+
+                    <i class="bi bi-file-earmark-bar-graph-fill"></i>
+
+                </div>
+
+                <h3>
+
+                    Professional Reports
+
+                </h3>
+
+                <p>
+
+                    Beautiful dashboards with downloadable
+                    PDF reports.
+
+                </p>
+
+                <ul>
+
+                    <li>Charts</li>
+
+                    <li>Dashboard</li>
+
+                    <li>Export PDF</li>
+
+                </ul>
+
+            </div>
+
+            <!-- CARD 6 -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon growth">
+
+                    <i class="bi bi-graph-up-arrow"></i>
+
+                </div>
+
+                <h3>
+
+                    Growth Insights
+
+                </h3>
+
+                <p>
+
+                    Discover practical improvements that
+                    increase traffic and conversions.
+
+                </p>
+
+                <ul>
+
+                    <li>SEO Growth</li>
+
+                    <li>User Experience</li>
+
+                    <li>AI Insights</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <!-- =========================
+                TRUST BADGE
+        ========================== -->
+
+        <div class="why-trust text-center">
+
+            <div class="trust-box">
+
+                ⭐ Trusted by Developers, Agencies &
+                Businesses Worldwide
+
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+
+    <!-- ==========================================
+                AUDIT CATEGORIES
+    ========================================== -->
+
+    <section id="audit-categories" class="audit-section">
+
+        <div class="container">
+
+            <!-- Heading -->
+
+            <div class="section-header text-center">
+
+                <span class="section-tag">
+                    <i class="bi bi-stars"></i>
+                    Complete Website Analysis
+                </span>
+
+                <h2 class="section-title">
+                    Everything We Analyze
+                </h2>
+
+                <p class="section-description">
+
+                    Our AI-powered audit engine checks every important aspect
+                    of your website using industry-standard technologies including
+                    Lighthouse, SEO analysis, Accessibility testing and AI recommendations.
+
+                </p>
+
+            </div>
+
+            <!-- Cards -->
+
+            <div class="row g-4 mt-5">
+
+                <!-- SEO -->
+
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="audit-card">
+
+                        <div class="audit-icon seo">
+                            <i class="bi bi-search"></i>
+                        </div>
+
+                        <h4>SEO Audit</h4>
+
+                        <p>
+                            Improve search visibility with complete on-page SEO analysis.
+                        </p>
+
+                        <ul>
+
+                            <li><i class="bi bi-check-circle-fill"></i> Meta Tags</li>
+
+                            <li><i class="bi bi-check-circle-fill"></i> Headings</li>
+
+                            <li><i class="bi bi-check-circle-fill"></i> Image ALT</li>
+
+                            <li><i class="bi bi-check-circle-fill"></i> Sitemap.xml</li>
+
+                            <li><i class="bi bi-check-circle-fill"></i> Robots.txt</li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <!-- Performance -->
+
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="audit-card">
+
+                        <div class="audit-icon performance">
+                            <i class="bi bi-speedometer2"></i>
+                        </div>
+
+                        <h4>Performance</h4>
+
+                        <p>
+                            Lighthouse powered Core Web Vitals testing.
+                        </p>
+
+                        <ul>
+
+                            <li><i class="bi bi-check-circle-fill"></i> FCP</li>
+
+                            <li><i class="bi bi-check-circle-fill"></i> LCP</li>
+
+                            <li><i class="bi bi-check-circle-fill"></i> Speed Index</li>
+
+                            <li><i class="bi bi-check-circle-fill"></i> CLS</li>
+
+                            <li><i class="bi bi-check-circle-fill"></i> TBT</li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <!-- Accessibility -->
+
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="audit-card">
+
+                        <div class="audit-icon accessibility">
+                            <i class="bi bi-universal-access"></i>
+                        </div>
+
+                        <h4>Accessibility</h4>
+
+                        <p>
+                            Ensure every visitor can use your website comfortably.
+                        </p>
+
+                        <ul>
+
+                            <li><i class="bi bi-check-circle-fill"></i> ARIA Labels</li>
+
+                            <li><i class="bi bi-check-circle-fill"></i> Color Contrast</li>
+
+                            <li><i class="bi bi-check-circle-fill"></i> Keyboard Navigation</li>
+
+                            <li><i class="bi bi-check-circle-fill"></i> Semantic HTML</li>
+
+                            <li><i class="bi bi-check-circle-fill"></i> Screen Readers</li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <!-- Security -->
+
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="audit-card">
+
+                        <div class="audit-icon security">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+
+                        <h4>Security</h4>
+
+                        <p>
+                            Detect common website security issues instantly.
+                        </p>
+
+                        <ul>
+
+                            <li><i class="bi bi-check-circle-fill"></i> HTTPS</li>
+
+                            <li><i class="bi bi-check-circle-fill"></i> SSL Certificate</li>
+
+                            <li><i class="bi bi-check-circle-fill"></i> Security Headers</li>
+
+                            <li><i class="bi bi-check-circle-fill"></i> Mixed Content</li>
+
+                            <li><i class="bi bi-check-circle-fill"></i> Secure Resources</li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <!-- Best Practices -->
+
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="audit-card">
+
+                        <div class="audit-icon best">
+                            <i class="bi bi-patch-check"></i>
+                        </div>
+
+                        <h4>Best Practices</h4>
+
+                        <p>
+                            Follow Google's latest web development standards.
+                        </p>
+
+                        <ul>
+
+                            <li><i class="bi bi-check-circle-fill"></i> Modern APIs</li>
+
+                            <li><i class="bi bi-check-circle-fill"></i> Browser Support</li>
+
+                            <li><i class="bi bi-check-circle-fill"></i> Image Optimization</li>
+
+                            <li><i class="bi bi-check-circle-fill"></i> JavaScript Quality</li>
+
+                            <li><i class="bi bi-check-circle-fill"></i> Web Standards</li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <!-- AI -->
+
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="audit-card">
+
+                        <div class="audit-icon ai">
+                            <i class="bi bi-stars"></i>
+                        </div>
+
+                        <h4>AI Recommendations</h4>
+
+                        <p>
+                            Receive intelligent suggestions powered by Gemini AI.
+                        </p>
+
+                        <ul>
+
+                            <li><i class="bi bi-check-circle-fill"></i> SEO Improvements</li>
+
+                            <li><i class="bi bi-check-circle-fill"></i> Performance Tips</li>
+
+                            <li><i class="bi bi-check-circle-fill"></i> UX Suggestions</li>
+
+                            <li><i class="bi bi-check-circle-fill"></i> Security Advice</li>
+
+                            <li><i class="bi bi-check-circle-fill"></i> Growth Insights</li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- =====================================================
+                        TESTIMONIALS SECTION
+    ====================================================== -->
+
+    <section id="testimonials" class="testimonial-section">
+
+        <div class="container">
+
+            <!-- Heading -->
+
+            <div class="text-center">
+
+                <span class="section-tag">
+                    Trusted by Professionals
+                </span>
+
+                <h2 class="section-title">
+                    Loved by Developers, Agencies & Businesses
+                </h2>
+
+                <p class="section-description">
+                    Thousands of professionals trust AI Audit to improve SEO,
+                    performance, accessibility and security with detailed reports
+                    and AI-powered recommendations.
+                </p>
+
+            </div>
+
+            <!-- Slider -->
+
+            <div class="testimonial-slider" id="testimonialSlider">
+
+                <div class="testimonial-track">
+
+                    <!-- ================= Card 1 ================= -->
+
+                    <div class="testimonial-card">
+
+                        <div class="stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+
+                        <p class="review">
+                            "The audit report was incredibly detailed.
+                            We improved our Lighthouse score from 72 to 98
+                            within a few days."
+                        </p>
+
+                        <div class="testimonial-user">
+
+                            <img src="/static/images/users/user1.jpg" alt="Rahul Sharma">
+
+                            <div>
+
+                                <h5>Rahul Sharma</h5>
+
+                                <span>Frontend Developer</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ================= Card 2 ================= -->
+
+                    <div class="testimonial-card">
+
+                        <div class="stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+
+                        <p class="review">
+                            "AI recommendations instantly found SEO problems
+                            that we had missed for months. The PDF report is
+                            fantastic."
+                        </p>
+
+                        <div class="testimonial-user">
+
+                            <img src="/static/images/users/user2.jpg" alt="Priya Patel">
+
+                            <div>
+
+                                <h5>Priya Patel</h5>
+
+                                <span>Digital Marketing Expert</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ================= Card 3 ================= -->
+
+                    <div class="testimonial-card">
+
+                        <div class="stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+
+                        <p class="review">
+                            "The dashboard is beautiful and the downloadable
+                            reports impressed all of our clients.
+                            Highly recommended."
+                        </p>
+
+                        <div class="testimonial-user">
+
+                            <img src="/static/images/users/user3.jpg" alt="Michael Brown">
+
+                            <div>
+
+                                <h5>Michael Brown</h5>
+
+                                <span>Agency Owner</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ================= Card 4 ================= -->
+
+                    <div class="testimonial-card">
+
+                        <div class="stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+
+                        <p class="review">
+                            "Performance optimization became much easier after
+                            using AI Audit. Every issue is explained clearly."
+                        </p>
+
+                        <div class="testimonial-user">
+
+                            <img src="/static/images/users/user4.jpg" alt="Emily Wilson">
+
+                            <div>
+
+                                <h5>Emily Wilson</h5>
+
+                                <span>UI/UX Designer</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ================= Duplicate Cards For Infinite Scroll ================= -->
+
+                    <div class="testimonial-card">
+
+                        <div class="stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+
+                        <p class="review">
+                            "The audit report was incredibly detailed.
+                            We improved our Lighthouse score from 72 to 98
+                            within a few days."
+                        </p>
+
+                        <div class="testimonial-user">
+
+                            <img src="/static/images/users/user1.jpg" alt="Rahul Sharma">
+
+                            <div>
+
+                                <h5>Rahul Sharma</h5>
+
+                                <span>Frontend Developer</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="testimonial-card">
+
+                        <div class="stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+
+                        <p class="review">
+                            "AI recommendations instantly found SEO problems
+                            that we had missed for months. The PDF report is
+                            fantastic."
+                        </p>
+
+                        <div class="testimonial-user">
+
+                            <img src="/static/images/users/user2.jpg" alt="Priya Patel">
+
+                            <div>
+
+                                <h5>Priya Patel</h5>
+
+                                <span>Digital Marketing Expert</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="testimonial-card">
+
+                        <div class="stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+
+                        <p class="review">
+                            "The dashboard is beautiful and the downloadable
+                            reports impressed all of our clients.
+                            Highly recommended."
+                        </p>
+
+                        <div class="testimonial-user">
+
+                            <img src="/static/images/users/user3.jpg" alt="Michael Brown">
+
+                            <div>
+
+                                <h5>Michael Brown</h5>
+
+                                <span>Agency Owner</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="testimonial-card">
+
+                        <div class="stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+
+                        <p class="review">
+                            "Performance optimization became much easier after
+                            using AI Audit. Every issue is explained clearly."
+                        </p>
+
+                        <div class="testimonial-user">
+
+                            <img src="/static/images/users/user4.jpg" alt="Emily Wilson">
+
+                            <div>
+
+                                <h5>Emily Wilson</h5>
+
+                                <span>UI/UX Designer</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!--==================================================
+                        FAQ SECTION
+    ===================================================-->
+
+    <section id="faq" class="faq-section">
+
+        <div class="container">
+
+            <div class="text-center">
+
+                <span class="section-tag">
+                    <i class="bi bi-question-circle-fill"></i>
+                    Frequently Asked Questions
+                </span>
+
+                <h2 class="section-title">
+                    Everything You Need to Know
+                </h2>
+
+                <p class="section-description">
+                    Find answers to the most common questions about AI Audit,
+                    website analysis, reports, and security.
+                </p>
+
+            </div>
+
+            <div class="faq-container">
+
+                <div class="accordion" id="faqAccordion">
+
+                    <!-- FAQ 1 -->
+
+                    <div class="accordion-item">
+
+                        <h2 class="accordion-header">
+
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
+
+                                Is AI Audit completely free?
+
+                            </button>
+
+                        </h2>
+
+                        <div id="faq1"
+                            class="accordion-collapse collapse show"
+                            data-bs-parent="#faqAccordion">
+
+                            <div class="accordion-body">
+
+                                Yes. You can run website audits completely free.
+                                Premium features such as history, monitoring,
+                                and advanced reports may be introduced later.
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- FAQ 2 -->
+
+                    <div class="accordion-item">
+
+                        <h2 class="accordion-header">
+
+                            <button
+                                class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#faq2"
+                                aria-expanded="false"
+                                aria-controls="faq2">
+
+                                What does the audit include?
+
+                            </button>
+
+                        </h2>
+
+                        <div id="faq2"
+                            class="accordion-collapse collapse"
+                            data-bs-parent="#faqAccordion">
+
+                            <div class="accordion-body">
+
+                                Every audit includes SEO, Performance,
+                                Accessibility, Security, Best Practices,
+                                AI Recommendations and downloadable PDF reports.
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- FAQ 3 -->
+
+                    <div class="accordion-item">
+
+                        <h2 class="accordion-header">
+
+                            <button
+                                    class="accordion-button collapsed"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#faq3"
+                                    aria-expanded="false"
+                                    aria-controls="faq3">
+
+                                Which technologies power AI Audit?
+
+                            </button>
+
+                        </h2>
+
+                        <div id="faq3"
+                            class="accordion-collapse collapse"
+                            data-bs-parent="#faqAccordion">
+
+                            <div class="accordion-body">
+
+                                AI Audit uses Python, FastAPI, Lighthouse,
+                                Google Gemini AI, Bootstrap, SQLite and modern
+                                web analysis libraries.
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- FAQ 4 -->
+
+                    <div class="accordion-item">
+
+                        <h2 class="accordion-header">
+
+                            <button class="accordion-button collapsed"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#faq4"
+                                    aria-expanded="false"
+                                    aria-controls="faq4">
+
+                                How long does an audit take?
+
+                            </button>
+
+                        </h2>
+
+                        <div id="faq4"
+                            class="accordion-collapse collapse"
+                            data-bs-parent="#faqAccordion">
+
+                            <div class="accordion-body">
+
+                                Most websites are analyzed within
+                                20–30 seconds depending on page size.
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- FAQ 5 -->
+
+                    <div class="accordion-item">
+
+                        <h2 class="accordion-header">
+
+                            <button class="accordion-button collapsed"
+                                    types="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#faq5"
+                                    aria-expanded="false"
+                                    aria-controls="faq5">
+
+                                Is my website data secure?
+
+                            </button>
+
+                        </h2>
+
+                        <div id="faq5"
+                            class="accordion-collapse collapse"
+                            data-bs-parent="#faqAccordion">
+
+                            <div class="accordion-body">
+
+                                Yes. AI Audit only analyzes publicly
+                                accessible website information and does not
+                                modify or store your website content.
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- FAQ 6 -->
+
+                    <div class="accordion-item">
+
+                        <h2 class="accordion-header">
+
+                            <button class="accordion-button collapsed"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#faq6"
+                                    aria-expanded="false"
+                                    aria-controls="faq6">
+
+                                Can I download the audit report?
+
+                            </button>
+
+                        </h2>
+
+                        <div id="faq6"
+                            class="accordion-collapse collapse"
+                            data-bs-parent="#faqAccordion">
+
+                            <div class="accordion-body">
+
+                                Yes. Every completed audit can be exported
+                                as a professional PDF report containing
+                                scores, charts, findings and recommendations.
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ===========================================
+                    CTA BANNER
+    =========================================== -->
+
+    <section id="cta-banner" class="cta-banner">
+
+        <div class="container">
+
+            <div class="cta-wrapper">
+
+                <div class="cta-content">
+
+                    <span class="cta-tag">
+                        🚀 Ready to Improve Your Website?
+                    </span>
+
+                    <h2>
+
+                        Discover Hidden SEO, Performance & Security Issues
+                        in Under 30 Seconds
+
+                    </h2>
+
+                    <p>
+
+                        Analyze your website with our AI-powered audit engine and
+                        receive a professional report with SEO insights,
+                        Lighthouse metrics, accessibility checks, security analysis,
+                        and AI recommendations.
+
+                    </p>
+
+                    <div class="cta-buttons">
+
+                        <a href="/register" class="btn-cta-primary">
+
+                            <i class="bi bi-rocket-takeoff-fill"></i>
+
+                            Start Free Audit
+
+                        </a>
+
+                        <a href="#reports" class="btn-cta-secondary">
+
+                            <i class="bi bi-file-earmark-bar-graph-fill"></i>
+
+                            View Sample Report
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <!-- Right Side -->
+
+                <div class="cta-stats">
+
+                    <div class="stat-card">
+
+                        <h3>99+</h3>
+
+                        <span>Audit Checks</span>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <h3>30s</h3>
+
+                        <span>Average Scan</span>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <h3>PDF</h3>
+
+                        <span>Professional Reports</span>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <h3>AI</h3>
+
+                        <span>Smart Recommendations</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
 </main>
-{% include 'partials/footer.html' %}
+
+<!-- =========================
+        Footer
+========================= -->
+{% include "partials/footer.html" %}
+
 {% endblock %}

@@ -1,0 +1,333 @@
+<header class="dashboard-topbar">
+
+    <!-- ======================================================
+         LEFT — BRAND / PAGE TITLE
+    ======================================================= -->
+
+    <div class="topbar-left">
+
+        <div class="brand-logo">
+            
+            <div class="brand-content">
+
+                <span class="brand-name">
+                    AI Audit
+                </span>
+
+                <h1 class="page-title">
+                    Dashboard
+                </h1>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ======================================================
+         CENTER — SEARCH
+    ======================================================= -->
+
+    <div class="topbar-center">
+
+        <div class="search-box">
+
+            <i class="bi bi-search search-icon"></i>
+
+            <input
+                type="search"
+                id="dashboardSearch"
+                class="search-input"
+                placeholder="Search website audits..."
+                autocomplete="off"
+            >
+
+        </div>
+
+    </div>
+
+
+    <!-- ======================================================
+         RIGHT
+    ======================================================= -->
+
+    <div class="topbar-right">
+
+
+        <!-- ==================================================
+             NOTIFICATIONS
+        =================================================== -->
+
+        <div class="notification">
+
+            <button
+                type="button"
+                class="notification-btn"
+                id="notificationButton"
+                aria-label="Notifications"
+                aria-expanded="false">
+
+                <i class="bi bi-bell"></i>
+
+                <!--
+                    IMPORTANT:
+                    No fake number here.
+                    JavaScript gets the real unread count.
+                -->
+
+                <span
+                    class="notification-badge"
+                    id="notificationCount"
+                    style="display:none;">
+                </span>
+
+            </button>
+
+
+            <!-- ==============================================
+                 NOTIFICATION DROPDOWN
+            =============================================== -->
+
+            <div
+                class="notification-dropdown"
+                id="notificationDropdown"
+                aria-hidden="true">
+
+
+                <!-- HEADER -->
+
+                <div class="notification-header">
+
+                    <h5>
+                        Notifications
+                    </h5>
+
+
+                    <div class="notification-actions">
+
+                        <button
+                            type="button"
+                            class="notification-action"
+                            id="refreshNotificationsButton"
+                            title="Refresh notifications"
+                            aria-label="Refresh notifications">
+
+                            <i class="bi bi-arrow-clockwise"></i>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="notification-action"
+                            id="markAllNotifications">
+
+                            Mark all
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LIST -->
+
+                <div
+                    class="notification-list"
+                    id="notificationList">
+
+                    <div
+                        class="notification-loading"
+                        id="notificationLoading">
+
+                        <div
+                            class="spinner-border spinner-border-sm text-primary"
+                            role="status">
+                        </div>
+
+                        <span>
+                            Loading notifications...
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FOOTER -->
+
+                <div class="notification-footer">
+
+                    <a href="/history">
+                        View Audit History
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             USER PROFILE
+        =================================================== -->
+
+        <div class="user-profile">
+
+            <button
+                type="button"
+                class="user-profile-btn"
+                id="userProfileButton"
+                aria-expanded="false"
+                aria-haspopup="true">
+
+
+                <!-- AVATAR -->
+
+                <div class="user-avatar">
+
+                    <!--
+                        Initials are inserted by JavaScript.
+                    -->
+
+                    <span
+                        id="topbarUserInitials">
+                        --
+                    </span>
+
+                </div>
+
+
+                <!-- USER INFORMATION -->
+
+                <div class="user-info">
+
+                    <span
+                        class="user-name"
+                        id="topbarUserName">
+                        Loading...
+                    </span>
+
+                    <small
+                        class="user-role"
+                        id="topbarUserRole">
+                        Website Owner
+                    </small>
+
+                </div>
+
+
+                <i class="bi bi-chevron-down"></i>
+
+            </button>
+
+
+            <!-- ==============================================
+                 USER DROPDOWN
+            =============================================== -->
+
+            <div
+                class="user-dropdown"
+                id="userDropdown"
+                aria-hidden="true">
+
+
+                <!-- USER INFO -->
+
+                <div class="user-dropdown-header">
+
+
+                    <div
+                        class="dropdown-avatar"
+                        id="topbarDropdownInitials">
+
+                        --
+
+                    </div>
+
+
+                    <div class="dropdown-user-info">
+
+                        <h6
+                            class="dropdown-user-name"
+                            id="topbarDropdownName">
+
+                            Loading...
+
+                        </h6>
+
+
+                        <p
+                            class="dropdown-user-email"
+                            id="topbarDropdownEmail">
+
+                            Loading...
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="dropdown-divider"></div>
+
+
+                <!-- PROFILE -->
+
+                <a
+                    href="/profile"
+                    class="dropdown-item">
+
+                    <i class="bi bi-person-circle"></i>
+
+                    <span>
+                        My Profile
+                    </span>
+
+                </a>
+
+
+                <!-- SETTINGS -->
+
+                <a
+                    href="/settings"
+                    class="dropdown-item">
+
+                    <i class="bi bi-gear"></i>
+
+                    <span>
+                        Settings
+                    </span>
+
+                </a>
+
+
+                <div class="dropdown-divider"></div>
+
+
+                <!-- LOGOUT -->
+
+                <button
+                    type="button"
+                    id="logoutButton"
+                    class="dropdown-item logout-item">
+
+                    <i class="bi bi-box-arrow-right"></i>
+
+                    <span>
+                        Logout
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>

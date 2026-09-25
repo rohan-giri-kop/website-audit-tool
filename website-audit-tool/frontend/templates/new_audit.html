@@ -1,17 +1,651 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
+
+{% block head %}
+
+<link
+    rel="stylesheet"
+    href="/static/css/new_audit.css?v=1"
+>
+
+{% endblock %}
+
+
 {% block body %}
-<main class="page-wrap container py-5">
-  <div class="row justify-content-center">
-    <div class="col-lg-8">
-      <div class="glass-card p-4 p-md-5">
-        <div class="d-flex justify-content-between align-items-center mb-3"><div><h1 class="h3 fw-bold mb-1">New Audit</h1><p class="text-muted mb-0">Enter a website URL to generate a report.</p></div></div>
-        <form id="auditForm" class="d-grid gap-3">
-          <input class="form-control form-control-lg" type="url" id="auditUrl" placeholder="https://example.com" required>
-          <button class="btn btn-primary btn-lg" type="submit">Analyze Website</button>
-        </form>
-        <div id="auditLoader" class="loading-panel d-none mt-4"><div class="skeleton-line"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div>
-      </div>
-    </div>
-  </div>
-</main>
+
+<div class="new-audit-page">
+
+
+    <!-- ======================================================
+         PAGE HEADER
+    ======================================================= -->
+
+    <section class="new-audit-header">
+
+        <div class="new-audit-header-content">
+
+            <div class="new-audit-breadcrumb">
+
+                <a href="/dashboard">
+
+                    <i class="bi bi-grid-1x2"></i>
+
+                    Dashboard
+
+                </a>
+
+                <i class="bi bi-chevron-right"></i>
+
+                <span>
+                    New Audit
+                </span>
+
+            </div>
+
+
+            <div class="new-audit-title-row">
+
+                <div>
+
+                    <span class="new-audit-eyebrow">
+
+                        <i class="bi bi-stars"></i>
+
+                        WEBSITE AUDIT
+
+                    </span>
+
+
+                    <h1>
+                        Audit a new website
+                    </h1>
+
+
+                    <p>
+                        Analyze your website's SEO,
+                        performance, accessibility,
+                        security and mobile health.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================================
+         MAIN CONTENT
+    ======================================================= -->
+
+    <main class="new-audit-content">
+
+
+        <div class="new-audit-grid">
+
+
+            <!-- ==================================================
+                 AUDIT FORM
+            =================================================== -->
+
+            <section class="new-audit-card audit-form-card">
+
+
+                <div class="new-audit-card-header">
+
+                    <div class="new-audit-card-icon">
+
+                        <i class="bi bi-globe2"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h2>
+                            Enter your website
+                        </h2>
+
+                        <p>
+                            Start with the URL you want
+                            to analyze.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <form
+                    id="newAuditForm"
+                    novalidate
+                >
+
+
+                    <!-- ==========================================
+                         WEBSITE URL
+                    =========================================== -->
+
+                    <div class="audit-form-group">
+
+                        <label
+                            for="websiteUrl"
+                            class="audit-form-label"
+                        >
+
+                            Website URL
+
+                            <span>
+                                Required
+                            </span>
+
+                        </label>
+
+
+                        <div
+                            class="audit-url-input-wrapper"
+                            id="websiteUrlWrapper"
+                        >
+
+                            <i
+                                class="bi bi-link-45deg"
+                            ></i>
+
+
+                            <input
+                                type="url"
+                                id="websiteUrl"
+                                name="website_url"
+                                class="audit-url-input"
+                                placeholder="https://example.com"
+                                autocomplete="url"
+                                inputmode="url"
+                                required
+                            >
+
+
+                            <button
+                                type="button"
+                                id="clearWebsiteUrl"
+                                class="audit-clear-button"
+                                aria-label="Clear website URL"
+                                hidden
+                            >
+
+                                <i class="bi bi-x"></i>
+
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            id="websiteUrlError"
+                            class="audit-field-error"
+                            role="alert"
+                            hidden
+                        ></div>
+
+
+                        <p class="audit-form-help">
+
+                            <i class="bi bi-shield-check"></i>
+
+                            Your URL is used only to perform
+                            the requested website audit.
+
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- ==========================================
+                         AUDIT MODULES
+                    =========================================== -->
+
+                    <div class="audit-modules-section">
+
+                        <div class="audit-section-heading">
+
+                            <div>
+
+                                <h3>
+                                    Audit checks
+                                </h3>
+
+                                <p>
+                                    Your audit includes these
+                                    analysis areas automatically.
+                                </p>
+
+                            </div>
+
+
+                            <span class="audit-module-count">
+                                6 checks
+                            </span>
+
+                        </div>
+
+
+
+                        <div class="audit-module-grid">
+
+
+                            <!-- SEO -->
+
+                            <article class="audit-module-card">
+
+                                <div class="audit-module-icon audit-module-seo">
+
+                                    <i class="bi bi-search"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <h4>
+                                        SEO
+                                    </h4>
+
+                                    <p>
+                                        Meta tags, headings,
+                                        images and crawlability.
+                                    </p>
+
+                                </div>
+
+                                <i class="bi bi-check-circle-fill audit-module-check"></i>
+
+                            </article>
+
+
+
+                            <!-- Performance -->
+
+                            <article class="audit-module-card">
+
+                                <div class="audit-module-icon audit-module-performance">
+
+                                    <i class="bi bi-lightning-charge"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <h4>
+                                        Performance
+                                    </h4>
+
+                                    <p>
+                                        Speed, Lighthouse and
+                                        performance metrics.
+                                    </p>
+
+                                </div>
+
+                                <i class="bi bi-check-circle-fill audit-module-check"></i>
+
+                            </article>
+
+
+
+                            <!-- Accessibility -->
+
+                            <article class="audit-module-card">
+
+                                <div class="audit-module-icon audit-module-accessibility">
+
+                                    <i class="bi bi-universal-access"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <h4>
+                                        Accessibility
+                                    </h4>
+
+                                    <p>
+                                        Accessibility issues and
+                                        usability checks.
+                                    </p>
+
+                                </div>
+
+                                <i class="bi bi-check-circle-fill audit-module-check"></i>
+
+                            </article>
+
+
+
+                            <!-- Security -->
+
+                            <article class="audit-module-card">
+
+                                <div class="audit-module-icon audit-module-security">
+
+                                    <i class="bi bi-shield-check"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <h4>
+                                        Security
+                                    </h4>
+
+                                    <p>
+                                        HTTPS, headers and
+                                        security checks.
+                                    </p>
+
+                                </div>
+
+                                <i class="bi bi-check-circle-fill audit-module-check"></i>
+
+                            </article>
+
+
+
+                            <!-- Mobile -->
+
+                            <article class="audit-module-card">
+
+                                <div class="audit-module-icon audit-module-mobile">
+
+                                    <i class="bi bi-phone"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <h4>
+                                        Mobile
+                                    </h4>
+
+                                    <p>
+                                        Mobile usability and
+                                        responsive checks.
+                                    </p>
+
+                                </div>
+
+                                <i class="bi bi-check-circle-fill audit-module-check"></i>
+
+                            </article>
+
+
+
+                            <!-- UI / UX -->
+
+                            <article class="audit-module-card">
+
+                                <div class="audit-module-icon audit-module-uiux">
+
+                                    <i class="bi bi-layout-text-window"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <h4>
+                                        UI / UX
+                                    </h4>
+
+                                    <p>
+                                        Interface and experience
+                                        quality analysis.
+                                    </p>
+
+                                </div>
+
+                                <i class="bi bi-check-circle-fill audit-module-check"></i>
+
+                            </article>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ==========================================
+                         SUBMIT AREA
+                    =========================================== -->
+
+                    <div class="new-audit-submit-area">
+
+
+                        <div class="audit-submit-note">
+
+                            <i class="bi bi-clock-history"></i>
+
+                            <div>
+
+                                <strong>
+                                    Audit time varies by website
+                                </strong>
+
+                                <span>
+                                    The analysis may take a few
+                                    moments to complete.
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            id="startAuditButton"
+                            class="start-audit-button"
+                        >
+
+                            <span
+                                id="startAuditButtonContent"
+                            >
+
+                                <i class="bi bi-stars"></i>
+
+                                Start Website Audit
+
+                            </span>
+
+
+                            <span
+                                id="startAuditButtonLoading"
+                                hidden
+                            >
+
+                                <span
+                                    class="spinner-border spinner-border-sm"
+                                    aria-hidden="true"
+                                ></span>
+
+                                Analyzing website...
+
+                            </span>
+
+                        </button>
+
+                    </div>
+
+
+                </form>
+
+            </section>
+
+
+
+            <!-- ==================================================
+                 SIDE INFORMATION
+            =================================================== -->
+
+            <aside class="new-audit-side">
+
+
+                <!-- ==========================================
+                     WHAT WE ANALYZE
+                =========================================== -->
+
+                <section class="new-audit-card audit-info-card">
+
+                    <span class="new-audit-eyebrow">
+
+                        <i class="bi bi-stars"></i>
+
+                        WHAT WE ANALYZE
+
+                    </span>
+
+
+                    <h2>
+                        One audit.
+                        <br>
+                        Complete website health.
+                    </h2>
+
+
+                    <p>
+                        Get a unified view of the areas that
+                        affect your website's quality and
+                        discover where improvements are needed.
+                    </p>
+
+
+                    <ul class="audit-benefit-list">
+
+                        <li>
+
+                            <span>
+                                <i class="bi bi-check2"></i>
+                            </span>
+
+                            SEO opportunities
+
+                        </li>
+
+                        <li>
+
+                            <span>
+                                <i class="bi bi-check2"></i>
+                            </span>
+
+                            Performance bottlenecks
+
+                        </li>
+
+                        <li>
+
+                            <span>
+                                <i class="bi bi-check2"></i>
+                            </span>
+
+                            Accessibility issues
+
+                        </li>
+
+                        <li>
+
+                            <span>
+                                <i class="bi bi-check2"></i>
+                            </span>
+
+                            Security weaknesses
+
+                        </li>
+
+                        <li>
+
+                            <span>
+                                <i class="bi bi-check2"></i>
+                            </span>
+
+                            Mobile experience
+
+                        </li>
+
+                    </ul>
+
+                </section>
+
+
+
+                <!-- ==========================================
+                     RECENT AUDIT LINK
+                =========================================== -->
+
+                <section class="new-audit-card audit-history-card">
+
+                    <div class="audit-history-icon">
+
+                        <i class="bi bi-clock-history"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Review previous audits
+                        </h3>
+
+                        <p>
+                            Compare your website health
+                            over time.
+                        </p>
+
+
+                        <a href="/audits">
+
+                            View Website Audits
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </section>
+
+
+            </aside>
+
+
+        </div>
+
+
+        <!-- ======================================================
+             ERROR / SUCCESS MESSAGE
+        ======================================================= -->
+
+        <div
+            id="auditGlobalMessage"
+            class="audit-global-message"
+            role="alert"
+            hidden
+        ></div>
+
+
+    </main>
+
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script
+    src="/static/js/new_audit.js?v=1"
+></script>
+
 {% endblock %}

@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request
+from fastapi import APIRouter, FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -7,16 +7,27 @@ from fastapi.staticfiles import StaticFiles
 
 from fastapi.templating import Jinja2Templates
 
-from backend.app.api import auth, audits, reports, ui
+from backend.app.api import (
+    auth,
+    audits,
+    reports,
+    ui,
+    dashboard,
+    user,
+    notifications,
+)
 from backend.app.database.session import init_db
 from backend.app.utils.config import settings
 from fastapi.staticfiles import StaticFiles
 from backend.app.api.settings import router as settings_router
+from backend.app.api import password
+from backend.app.api.notification_page import router as notification_page_router
 
 from pathlib import Path
 
-
 app = FastAPI(title=settings.app_name, version="1.0.0")
+
+app.include_router(reports.router, prefix="/api/reports", tags=["reports"])
 
 app.add_middleware(
     CORSMiddleware,
@@ -64,6 +75,35 @@ app.include_router(
     prefix="/api/settings",
     tags=["settings"]
 )
+app.include_router(
+    password.router,
+    prefix="/api/password",
+    tags=["Password"]
+)
+
+
+app.include_router(
+    dashboard.router,
+    tags=["Dashboard"]
+)
+
+app.include_router(
+    user.router,
+    tags=["User"]
+)
+
+app.include_router(
+    notifications.router,
+    prefix="/api",
+    tags=["Notifications"]
+)
+
+app.include_router(
+    notification_page_router
+)
+
+
+
 
 @app.exception_handler(404)
 async def not_found(_: Request, __: Exception):

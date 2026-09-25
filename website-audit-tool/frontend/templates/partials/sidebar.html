@@ -1,0 +1,383 @@
+<!-- ==========================================================
+     AI AUDIT TOOL
+     DASHBOARD SIDEBAR
+========================================================== -->
+
+<aside
+    class="dashboard-sidebar"
+    id="dashboardSidebar"
+>
+
+
+    <!-- ======================================================
+         SIDEBAR HEADER
+    ======================================================= -->
+
+    <div class="sidebar-header">
+
+        <a
+            href="/dashboard"
+            class="sidebar-brand"
+        >
+
+            <div class="sidebar-logo">
+
+                <i class="bi bi-shield-check"></i>
+
+            </div>
+
+
+            <div class="sidebar-brand-text">
+
+                <span class="sidebar-brand-name">
+                    AI Audit
+                </span>
+
+                <span class="sidebar-brand-subtitle">
+                    Website Intelligence
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <!-- Collapse -->
+
+        <button
+            type="button"
+            class="sidebar-collapse-btn"
+            id="sidebarCollapseButton"
+            aria-label="Collapse sidebar"
+            title="Collapse sidebar"
+        >
+
+            <i class="bi bi-chevron-left"></i>
+
+        </button>
+
+    </div>
+
+
+
+    <!-- ======================================================
+         SIDEBAR CONTENT
+    ======================================================= -->
+
+    <div class="sidebar-content">
+
+
+        <!-- ==================================================
+             MAIN
+        =================================================== -->
+
+        <div class="sidebar-section">
+
+            <div class="sidebar-section-title">
+                Main
+            </div>
+
+
+            <nav
+                class="sidebar-nav"
+                aria-label="Main navigation"
+            >
+
+
+                <!-- Dashboard -->
+
+                <a
+                    href="/dashboard"
+                    class="sidebar-nav-item"
+                >
+
+                    <span class="sidebar-nav-icon">
+
+                        <i class="bi bi-grid-1x2-fill"></i>
+
+                    </span>
+
+                    <span class="sidebar-nav-label">
+                        Dashboard
+                    </span>
+
+                </a>
+
+
+
+                <!-- Website Audits -->
+
+                <a
+                    href="/audits"
+                    class="sidebar-nav-item"
+                >
+
+                    <span class="sidebar-nav-icon">
+
+                        <i class="bi bi-globe2"></i>
+
+                    </span>
+
+                    <span class="sidebar-nav-label">
+                        Website Audits
+                    </span>
+
+                </a>
+
+
+
+                <!-- Reports -->
+
+                <a
+                    href="/reports"
+                    class="sidebar-nav-item"
+                >
+
+                    <span class="sidebar-nav-icon">
+
+                        <i class="bi bi-file-earmark-text"></i>
+
+                    </span>
+
+                    <span class="sidebar-nav-label">
+                        Reports
+                    </span>
+
+                </a>
+
+
+            </nav>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             DIVIDER
+        =================================================== -->
+
+        <div class="sidebar-divider"></div>
+
+
+
+        <!-- ==================================================
+             TOOLS
+        =================================================== -->
+
+        <div class="sidebar-section">
+
+            <div class="sidebar-section-title">
+                Tools
+            </div>
+
+
+            <nav
+                class="sidebar-nav"
+                aria-label="Tools navigation"
+            >
+
+
+                <!-- Notifications -->
+
+                <a
+                    href="/notifications"
+                    class="sidebar-nav-item"
+                >
+
+                    <span class="sidebar-nav-icon">
+
+                        <i class="bi bi-bell"></i>
+
+                    </span>
+
+
+                    <span class="sidebar-nav-label">
+                        Notifications
+                    </span>
+
+
+                    <!--
+                        IMPORTANT:
+                        Starts hidden.
+                        JavaScript inserts real unread count.
+                    -->
+
+                    <span
+                        class="sidebar-nav-badge"
+                        id="sidebarNotificationBadge"
+                        aria-label="Unread notifications"
+                        style="display: none;">
+                    </span>
+                </a>
+
+
+
+                <!-- Settings -->
+
+                <a
+                    href="/settings"
+                    class="sidebar-nav-item"
+                >
+
+                    <span class="sidebar-nav-icon">
+
+                        <i class="bi bi-gear"></i>
+
+                    </span>
+
+
+                    <span class="sidebar-nav-label">
+                        Settings
+                    </span>
+
+                </a>
+
+
+            </nav>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ======================================================
+         SIDEBAR USER
+    ======================================================= -->
+
+    <div class="sidebar-user">
+
+
+        <button
+            type="button"
+            class="sidebar-user-button"
+            id="sidebarUserButton"
+            aria-expanded="false"
+            aria-label="Open user menu"
+        >
+
+
+            <!-- Avatar -->
+
+            <span
+                class="sidebar-user-avatar"
+                id="sidebarUserAvatar"
+            >
+                --
+            </span>
+
+
+
+            <!-- User Information -->
+
+            <span class="sidebar-user-info">
+
+                <span
+                    class="sidebar-user-name"
+                    id="sidebarUserName"
+                >
+                    Loading...
+                </span>
+
+
+                <span
+                    class="sidebar-user-role"
+                    id="sidebarUserRole"
+                >
+                    Account
+                </span>
+
+            </span>
+
+
+
+            <!-- Arrow -->
+
+            <span class="sidebar-user-arrow">
+
+                <i class="bi bi-chevron-up"></i>
+
+            </span>
+
+
+        </button>
+
+
+
+        <!-- ==================================================
+             USER DROPDOWN
+        =================================================== -->
+
+        <div
+            class="sidebar-user-dropdown"
+            id="sidebarUserDropdown"
+        >
+
+
+            <!-- Profile -->
+
+            <a
+                href="/profile"
+                class="sidebar-user-dropdown-item"
+            >
+
+                <i class="bi bi-person"></i>
+
+                <span>
+                    Profile
+                </span>
+
+            </a>
+
+
+
+            <!-- Settings -->
+
+            <a
+                href="/settings"
+                class="sidebar-user-dropdown-item"
+            >
+
+                <i class="bi bi-gear"></i>
+
+                <span>
+                    Settings
+                </span>
+
+            </a>
+
+
+
+            <!-- Divider -->
+
+            <div
+                class="sidebar-user-dropdown-divider"
+            ></div>
+
+
+
+            <!-- Logout -->
+
+            <button
+                type="button"
+                class="sidebar-user-dropdown-item logout"
+                id="sidebarLogoutButton"
+            >
+
+                <i class="bi bi-box-arrow-right"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+</aside>

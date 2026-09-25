@@ -1,0 +1,42 @@
+:root{
+
+    /* Backgrounds */
+    --bg-main: #F8F7F3;
+    --bg-light: #FCFBF8;
+    --bg-card: #FFFFFF;
+
+    /* Accent */
+    --gold: #D4AF37;
+    --gold-light: #F6E7A8;
+
+    /* Brand */
+    --blue: #2563EB;
+
+    /* Text */
+    --text-dark: #16202A;
+    --text-light: #6B7280;
+
+    /* Borders */
+    --border: rgba(212,175,55,.18);
+
+}
+
+body{
+
+    background:
+        radial-gradient(circle at top right,
+        rgba(212,175,55,.08),
+        transparent 28%),
+
+        radial-gradient(circle at bottom left,
+        rgba(37,99,235,.05),
+        transparent 35%),
+
+        linear-gradient(
+            180deg,
+            #FCFBF8 0%,
+            #F9F8F4 50%,
+            #F6F5EF 100%
+        );
+
+}

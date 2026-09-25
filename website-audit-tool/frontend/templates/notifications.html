@@ -1,0 +1,497 @@
+{% extends "base.html" %}
+
+{% block head %}
+
+
+<!-- ======================================================
+     DASHBOARD SHELL
+====================================================== -->
+
+<link
+    rel="stylesheet"
+    href="/static/css/dashboard.css?v=11"
+>
+
+<link
+    rel="stylesheet"
+    href="/static/css/dashboard_topbar.css?v=4"
+>
+
+<link
+    rel="stylesheet"
+    href="/static/css/dashboard_sidebar.css?v=4"
+>
+
+
+<!-- ======================================================
+     NOTIFICATIONS PAGE
+====================================================== -->
+
+<link
+    rel="stylesheet"
+    href="/static/css/notifications.css?v=2"
+>
+
+{% endblock %}
+
+
+{% block body %}
+
+<div class="dashboard-layout">
+
+
+    <!-- ======================================================
+         SIDEBAR
+    ======================================================= -->
+
+    {% include "partials/sidebar.html" %}
+
+
+
+    <!-- ======================================================
+         MAIN AREA
+    ======================================================= -->
+
+    <main class="dashboard-main">
+
+
+        <!-- MOBILE SIDEBAR BUTTON -->
+
+        <button
+            type="button"
+            class="mobile-sidebar-toggle"
+            id="mobileSidebarToggle"
+            aria-label="Open navigation"
+            aria-controls="dashboardSidebar"
+            aria-expanded="false"
+        >
+
+            <i class="bi bi-list"></i>
+
+        </button>
+
+
+        <!-- SIDEBAR OVERLAY -->
+
+        <div
+            class="sidebar-overlay"
+            id="sidebarOverlay"
+        ></div>
+
+
+
+        <!-- ==================================================
+             TOPBAR
+        =================================================== -->
+
+        {% include "partials/topbar.html" %}
+
+
+
+        <!-- ==================================================
+             NOTIFICATION PAGE
+        =================================================== -->
+
+        <section class="notifications-page">
+
+
+            <!-- PAGE HEADER -->
+
+            <div class="notifications-page-header">
+
+
+                <div class="notifications-heading">
+
+
+                    <div class="notifications-title-row">
+
+                        <div class="notifications-title-icon">
+
+                            <i class="bi bi-bell"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h1>
+                                Notifications
+                            </h1>
+
+                            <p>
+                                Stay updated with important activity from your AI Audit account.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- HEADER ACTIONS -->
+
+                <div class="notifications-header-actions">
+
+
+                    <button
+                        type="button"
+                        class="notification-page-button secondary"
+                        id="refreshNotificationsPage"
+                    >
+
+                        <i class="bi bi-arrow-clockwise"></i>
+
+                        <span>
+                            Refresh
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="notification-page-button primary"
+                        id="markAllNotificationsPage"
+                    >
+
+                        <i class="bi bi-check2-all"></i>
+
+                        <span>
+                            Mark all as read
+                        </span>
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==================================================
+                 SUMMARY CARDS
+            =================================================== -->
+
+            <div class="notifications-summary">
+
+
+                <!-- TOTAL -->
+
+                <div class="notification-summary-card">
+
+                    <div class="notification-summary-icon">
+
+                        <i class="bi bi-bell"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="notification-summary-label">
+                            Total Notifications
+                        </span>
+
+                        <strong
+                            id="notificationTotal"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- UNREAD -->
+
+                <div class="notification-summary-card unread-summary">
+
+                    <div class="notification-summary-icon">
+
+                        <i class="bi bi-envelope"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="notification-summary-label">
+                            Unread
+                        </span>
+
+                        <strong
+                            id="notificationUnread"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- READ -->
+
+                <div class="notification-summary-card">
+
+                    <div class="notification-summary-icon">
+
+                        <i class="bi bi-check-circle"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="notification-summary-label">
+                            Read
+                        </span>
+
+                        <strong
+                            id="notificationRead"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==================================================
+                 FILTER BAR
+            =================================================== -->
+
+            <div class="notifications-toolbar">
+
+
+                <div class="notification-filter-tabs">
+
+
+                    <button
+                        type="button"
+                        class="notification-filter active"
+                        data-filter="all"
+                    >
+
+                        All
+
+                        <span
+                            id="allFilterCount"
+                        >
+                            0
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="notification-filter"
+                        data-filter="unread"
+                    >
+
+                        Unread
+
+                        <span
+                            id="unreadFilterCount"
+                        >
+                            0
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="notification-filter"
+                        data-filter="read"
+                    >
+
+                        Read
+
+                        <span
+                            id="readFilterCount"
+                        >
+                            0
+                        </span>
+
+                    </button>
+
+
+                </div>
+
+
+                <div class="notifications-toolbar-status">
+
+                    <span
+                        id="notificationPageStatus"
+                    >
+                        Loading...
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==================================================
+                 NOTIFICATION LIST
+            =================================================== -->
+
+            <div
+                class="notifications-list"
+                id="notificationsPageList"
+            >
+
+
+                <!-- LOADING -->
+
+                <div
+                    class="notifications-state"
+                    id="notificationsLoading"
+                >
+
+                    <div class="notifications-spinner">
+
+                        <span></span>
+
+                    </div>
+
+
+                    <h3>
+                        Loading notifications
+                    </h3>
+
+
+                    <p>
+                        Fetching your latest notifications...
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==================================================
+                 EMPTY STATE
+            =================================================== -->
+
+            <div
+                class="notifications-state hidden"
+                id="notificationsEmpty"
+            >
+
+                <div class="notifications-empty-icon">
+
+                    <i class="bi bi-bell-slash"></i>
+
+                </div>
+
+
+                <h3>
+                    No notifications
+                </h3>
+
+
+                <p>
+                    You're all caught up. New notifications will appear here.
+                </p>
+
+            </div>
+
+
+
+            <!-- ==================================================
+                 ERROR STATE
+            =================================================== -->
+
+            <div
+                class="notifications-state hidden"
+                id="notificationsError"
+            >
+
+                <div class="notifications-error-icon">
+
+                    <i class="bi bi-exclamation-circle"></i>
+
+                </div>
+
+
+                <h3>
+                    Unable to load notifications
+                </h3>
+
+
+                <p>
+                    Something went wrong while loading your notifications.
+                </p>
+
+
+                <button
+                    type="button"
+                    class="notification-page-button primary"
+                    id="retryNotificationsPage"
+                >
+
+                    <i class="bi bi-arrow-clockwise"></i>
+
+                    Try again
+
+                </button>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+{% endblock %}
+
+
+
+{% block scripts %}
+
+<!-- ======================================================
+     DASHBOARD SHELL
+====================================================== -->
+
+<script
+    src="/static/js/dashboard_topbar.js?v=4"
+></script>
+
+<script
+    src="/static/js/dashboard_sidebar.js?v=4"
+></script>
+
+
+<!-- ======================================================
+     NOTIFICATIONS
+====================================================== -->
+
+<script
+    src="/static/js/notifications.js?v=2"
+></script>
+
+{% endblock %}

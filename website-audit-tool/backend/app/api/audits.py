@@ -22,12 +22,35 @@ def _current_user_id(token: str = Depends(oauth2_scheme)) -> int:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid authentication token")
 
 
-@router.post("", response_model=AuditRead, status_code=status.HTTP_201_CREATED)
-def analyze(payload: AuditRequest, db: Session = Depends(get_db), user_id: int = Depends(_current_user_id)):
+@router.post(
+    "",
+    response_model=AuditRead,
+    status_code=status.HTTP_201_CREATED,
+)
+def analyze(
+    payload: AuditRequest,
+    db: Session = Depends(get_db),
+    user_id: int = Depends(_current_user_id),
+):
     if not db.get(User, user_id):
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User not found")
-    return create_audit(db, user_id, payload)
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="User not found",
+        )
 
+    website_url = str(payload.website_url).strip()
+
+    if not website_url:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Website URL is required",
+        )
+
+    return create_audit(
+        db=db,
+        user_id=user_id,
+        website_url=website_url,
+    )
 
 @router.get("", response_model=list[AuditRead])
 def history(db: Session = Depends(get_db), user_id: int = Depends(_current_user_id)):

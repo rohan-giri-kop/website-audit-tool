@@ -1,357 +1,934 @@
 {% extends 'base.html' %}
 
+{% block head %}
+
+<link
+    rel="stylesheet"
+    href="/static/css/report.css?v=2"
+>
+
+{% endblock %}
+
+
 {% block body %}
 
-<main class="page-wrap container py-5" data-audit-id="{{ audit_id }}">
+<main
+    class="report-page"
+    id="auditReportPage"
+    data-audit-id="{{ audit_id }}"
+>
 
-<div class="row g-4">
+    <!-- =====================================================
+         REPORT TOP HEADER
+    ====================================================== -->
 
-    <!-- Report Header -->
-    <div class="col-12">
-        <div class="glass-card p-4 p-md-5 report-hero">
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+    <section class="report-shell">
+
+        <div class="report-header">
+
+            <div class="report-header-left">
+
+                <a
+                    href="/dashboard"
+                    class="report-back"
+                >
+                    <i class="bi bi-arrow-left"></i>
+                    Dashboard
+                </a>
+
+                <span class="report-eyebrow">
+                    <i class="bi bi-stars"></i>
+                    AUDIT REPORT
+                </span>
+
+                <h1 id="reportUrl">
+                    Loading report...
+                </h1>
+
+                <p
+                    id="reportSummary"
+                    class="report-summary"
+                >
+                    Loading audit information...
+                </p>
+
+                <div class="report-meta">
+
+                    <span id="reportDate">
+                        —
+                    </span>
+
+                    <span class="report-meta-dot">
+                        •
+                    </span>
+
+                    <span>
+                        Audit #{{ audit_id }}
+                    </span>
+
+                    <span
+                        id="reportGrade"
+                        class="report-grade"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="report-header-actions">
+
+                <a
+                    href="/dashboard"
+                    class="report-secondary-button"
+                >
+                    <i class="bi bi-grid"></i>
+                    Dashboard
+                </a>
+
+                <a
+                    href="#"
+                    class="report-primary-button"
+                    id="downloadPdfBtn"
+                >
+                    <i class="bi bi-file-earmark-pdf"></i>
+                    Download PDF
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SCORE CARDS
+        ================================================== -->
+
+        <section
+            class="report-score-grid"
+            aria-label="Audit scores"
+        >
+
+            <!-- SEO -->
+
+            <article class="report-score-card">
+
+                <div class="report-score-top">
+
+                    <div class="report-score-icon seo">
+                        <i class="bi bi-search"></i>
+                    </div>
+
+                    <span>
+                        SEO
+                    </span>
+
+                </div>
+
+                <strong id="seoValue">
+                    0
+                </strong>
+
+                <div class="report-progress">
+                    <span id="seoBar"></span>
+                </div>
+
+                <small>
+                    Search optimization
+                </small>
+
+            </article>
+
+
+            <!-- PERFORMANCE -->
+
+            <article class="report-score-card">
+
+                <div class="report-score-top">
+
+                    <div class="report-score-icon performance">
+                        <i class="bi bi-lightning-charge"></i>
+                    </div>
+
+                    <span>
+                        Performance
+                    </span>
+
+                </div>
+
+                <strong id="performanceValue">
+                    0
+                </strong>
+
+                <div class="report-progress">
+                    <span id="performanceBar"></span>
+                </div>
+
+                <small>
+                    Speed & responsiveness
+                </small>
+
+            </article>
+
+
+            <!-- ACCESSIBILITY -->
+
+            <article class="report-score-card">
+
+                <div class="report-score-top">
+
+                    <div class="report-score-icon accessibility">
+                        <i class="bi bi-universal-access"></i>
+                    </div>
+
+                    <span>
+                        Accessibility
+                    </span>
+
+                </div>
+
+                <strong id="accessibilityValue">
+                    0
+                </strong>
+
+                <div class="report-progress">
+                    <span id="accessibilityBar"></span>
+                </div>
+
+                <small>
+                    Inclusive experience
+                </small>
+
+            </article>
+
+
+            <!-- SECURITY -->
+
+            <article class="report-score-card">
+
+                <div class="report-score-top">
+
+                    <div class="report-score-icon security">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+
+                    <span>
+                        Security
+                    </span>
+
+                </div>
+
+                <strong id="securityValue">
+                    0
+                </strong>
+
+                <div class="report-progress">
+                    <span id="securityBar"></span>
+                </div>
+
+                <small>
+                    Website protection
+                </small>
+
+            </article>
+
+
+            <!-- MOBILE -->
+
+            <article class="report-score-card">
+
+                <div class="report-score-top">
+
+                    <div class="report-score-icon mobile">
+                        <i class="bi bi-phone"></i>
+                    </div>
+
+                    <span>
+                        Mobile
+                    </span>
+
+                </div>
+
+                <strong id="mobileValue">
+                    0
+                </strong>
+
+                <div class="report-progress">
+                    <span id="mobileBar"></span>
+                </div>
+
+                <small>
+                    Mobile usability
+                </small>
+
+            </article>
+
+
+            <!-- OVERALL -->
+
+            <article class="report-score-card overall">
+
+                <div class="report-score-top">
+
+                    <div class="report-score-icon overall">
+                        <i class="bi bi-speedometer2"></i>
+                    </div>
+
+                    <span>
+                        Overall
+                    </span>
+
+                </div>
+
+                <strong id="overallValue">
+                    0
+                </strong>
+
+                <div class="report-progress">
+                    <span id="overallBar"></span>
+                </div>
+
+                <small>
+                    Overall website health
+                </small>
+
+            </article>
+
+        </section>
+
+
+        <!-- =================================================
+             SCORE BREAKDOWN + OVERALL
+        ================================================== -->
+
+        <section class="report-two-column">
+
+            <article class="report-card score-breakdown-card">
+
+                <div class="report-card-header">
+
+                    <div>
+
+                        <span class="report-section-label">
+                            AUDIT ANALYTICS
+                        </span>
+
+                        <h2>
+                            Score Breakdown
+                        </h2>
+
+                    </div>
+
+                    <div class="overall-score-circle">
+
+                        <span id="overallCircleScore">
+                            0
+                        </span>
+
+                        <small>
+                            /100
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="radar-wrapper">
+
+                    <svg
+                        id="scoreRadar"
+                        viewBox="0 0 420 320"
+                        role="img"
+                        aria-label="Audit score chart"
+                    ></svg>
+
+                </div>
+
+                <div
+                    class="radar-legend"
+                    id="radarLegend"
+                ></div>
+
+            </article>
+
+
+            <!-- EXECUTIVE SUMMARY -->
+
+            <article class="report-card">
+
+                <div class="report-card-header">
+
+                    <div>
+
+                        <span class="report-section-label">
+                            OVERVIEW
+                        </span>
+
+                        <h2>
+                            Executive Summary
+                        </h2>
+
+                    </div>
+
+                </div>
+
+                <div
+                    id="executiveSummary"
+                    class="executive-summary"
+                >
+                    Loading summary...
+                </div>
+
+
+                <div class="summary-score-list">
+
+                    <div class="summary-score-row">
+
+                        <div>
+                            <span class="summary-dot seo"></span>
+                            SEO
+                        </div>
+
+                        <strong id="summarySeo">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-score-row">
+
+                        <div>
+                            <span class="summary-dot performance"></span>
+                            Performance
+                        </div>
+
+                        <strong id="summaryPerformance">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-score-row">
+
+                        <div>
+                            <span class="summary-dot accessibility"></span>
+                            Accessibility
+                        </div>
+
+                        <strong id="summaryAccessibility">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-score-row">
+
+                        <div>
+                            <span class="summary-dot security"></span>
+                            Security
+                        </div>
+
+                        <strong id="summarySecurity">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-score-row">
+
+                        <div>
+                            <span class="summary-dot mobile"></span>
+                            Mobile
+                        </div>
+
+                        <strong id="summaryMobile">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- =================================================
+             WEBSITE SCREENSHOT
+        ================================================== -->
+
+        <section class="report-card">
+
+            <div class="report-card-header">
 
                 <div>
-                    <span class="eyebrow">Audit Report</span>
 
-                    <h1 class="display-6 fw-bold mb-2" id="reportUrl">
-                        Loading report...
-                    </h1>
+                    <span class="report-section-label">
+                        VISUAL CHECK
+                    </span>
 
-                    <p class="text-muted mb-0" id="reportSummary"></p>
+                    <h2>
+                        Website Screenshot
+                    </h2>
+
+                    <p>
+                        Captured during the website audit.
+                    </p>
+
                 </div>
 
-                <div>
-                    <a href="#" class="btn btn-outline-primary" id="downloadPdfBtn">
-                        Download PDF
-                    </a>
-                </div>
+                <span
+                    class="section-status"
+                    id="screenshotStatus"
+                >
+                    Checking...
+                </span>
 
             </div>
-        </div>
-    </div>
 
-    <!-- SEO -->
-    <div class="col-lg-2 col-md-4 col-6">
-        <div class="metric-card glass-card score-card">
-            <span>SEO</span>
 
-            <strong id="seoValue">0</strong>
+            <div
+                class="screenshot-container"
+                id="screenshotContainer"
+            >
 
-            <div class="progress mt-2">
-                <div class="progress-bar bg-primary"
-                     id="seoBar"
-                     role="progressbar"
-                     style="width:0%">
+                <div
+                    id="screenshotLoading"
+                    class="section-loading"
+                >
+                    <div class="loading-spinner"></div>
+                    Loading screenshot...
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Performance -->
-    <div class="col-lg-2 col-md-4 col-6">
-        <div class="metric-card glass-card score-card">
-            <span>Performance</span>
-
-            <strong id="performanceValue">0</strong>
-
-            <div class="progress mt-2">
-                <div class="progress-bar bg-success"
-                     id="performanceBar"
-                     role="progressbar"
-                     style="width:0%">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Accessibility -->
-    <div class="col-lg-2 col-md-4 col-6">
-        <div class="metric-card glass-card score-card">
-            <span>Accessibility</span>
-
-            <strong id="accessibilityValue">0</strong>
-
-            <div class="progress mt-2">
-                <div class="progress-bar bg-info"
-                     id="accessibilityBar"
-                     role="progressbar"
-                     style="width:0%">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Security -->
-    <div class="col-lg-2 col-md-4 col-6">
-        <div class="metric-card glass-card score-card">
-            <span>Security</span>
-
-            <strong id="securityValue">0</strong>
-
-            <div class="progress mt-2">
-                <div class="progress-bar bg-danger"
-                     id="securityBar"
-                     role="progressbar"
-                     style="width:0%">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-2 col-md-4 col-6">
-        <div class="metric-card glass-card score-card">
-            <span>Mobile</span>
-
-            <strong id="mobileValue">0</strong>
-
-            <div class="progress mt-2">
-                <div class="progress-bar bg-secondary"
-                    id="mobileBar"
-                    role="progressbar"
-                    style="width:0%">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Overall -->
-    <div class="col-lg-2 col-md-4 col-6">
-        <div class="metric-card glass-card score-card">
-            <span>Overall</span>
-
-            <strong id="overallValue">0</strong>
-
-            <div class="progress mt-2">
-                <div class="progress-bar bg-warning"
-                     id="overallBar"
-                     role="progressbar"
-                     style="width:0%">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Chart -->
-    <div class="col-lg-7">
-        <div class="glass-card p-4 h-100">
-            <h2 class="h5 fw-bold mb-3">
-                Score Breakdown
-            </h2>
-
-            <canvas id="reportChart" height="180"></canvas>
-        </div>
-    </div>
-
-    <!-- Website Screenshot -->
-    <div class="col-12">
-        <div class="glass-card p-4">
-
-            <h2 class="h5 fw-bold mb-3">
-                Website Screenshot
-            </h2>
-
-            <div class="text-center">
 
                 <img
                     id="websiteScreenshot"
-                    src=""
-                    alt="Website Screenshot"
-                    class="img-fluid rounded shadow"
-                    style="max-height:700px; width:auto;">
+                    alt="Audited website screenshot"
+                    hidden
+                >
 
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Executive Summary -->
-    <div class="col-lg-5">
-        <div class="glass-card p-4 h-100">
-            <h2 class="h5 fw-bold mb-3">
-                Executive Summary
-            </h2>
-
-            <div id="findingStream" class="finding-stream">
-            </div>
-        </div>
-    </div>
-
-    <!-- Accessibility Details -->
-    <div class="col-12">
-        <div class="glass-card p-4">
-
-            <h2 class="h5 fw-bold mb-3">
-                Accessibility Details
-            </h2>
-
-            <div class="row g-3" id="accessibilityDetails">
-
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body text-center">
-
-                            <h6 class="text-muted">
-                                Missing ALT Images
-                            </h6>
-
-                            <h2 id="missingAltImages">
-                                0
-                            </h2>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body text-center">
-
-                            <h6 class="text-muted">
-                                Unlabeled Inputs
-                            </h6>
-
-                            <h2 id="unlabeledInputs">
-                                0
-                            </h2>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body text-center">
-
-                            <h6 class="text-muted">
-                                ARIA Support
-                            </h6>
-
-                            <h2 id="ariaSupport">
-                                No
-                            </h2>
-
-                        </div>
-                    </div>
+                <div
+                    id="screenshotEmpty"
+                    class="section-empty"
+                    hidden
+                >
+                    <i class="bi bi-image"></i>
+                    <h3>
+                        Screenshot unavailable
+                    </h3>
+                    <p>
+                        The audit completed without a saved website screenshot.
+                    </p>
                 </div>
 
             </div>
 
-        </div>
-    </div>
+        </section>
 
-    <!-- Security Checks -->
-    <div class="col-12">
-        <div class="glass-card p-4">
 
-            <h2 class="h5 fw-bold mb-3">
-                Security Checks
-            </h2>
+        <!-- =================================================
+             PERFORMANCE METRICS
+        ================================================== -->
 
-            <div id="securityChecksContent">
+        <section class="report-card">
 
-                <div class="text-muted">
-                    Loading security information...
+            <div class="report-card-header">
+
+                <div>
+
+                    <span class="report-section-label">
+                        PERFORMANCE
+                    </span>
+
+                    <h2>
+                        Performance Metrics
+                    </h2>
+
+                    <p>
+                        Lighthouse performance measurements returned by the audit.
+                    </p>
+
+                </div>
+
+                <span
+                    class="section-status"
+                    id="performanceStatus"
+                >
+                    —
+                </span>
+
+            </div>
+
+
+            <div
+                class="metrics-grid"
+                id="performanceMetrics"
+            >
+
+                <div class="metric-detail-card">
+
+                    <span>
+                        FCP
+                    </span>
+
+                    <strong id="metricFcp">
+                        —
+                    </strong>
+
+                    <small>
+                        First Contentful Paint
+                    </small>
+
+                </div>
+
+
+                <div class="metric-detail-card">
+
+                    <span>
+                        LCP
+                    </span>
+
+                    <strong id="metricLcp">
+                        —
+                    </strong>
+
+                    <small>
+                        Largest Contentful Paint
+                    </small>
+
+                </div>
+
+
+                <div class="metric-detail-card">
+
+                    <span>
+                        Speed Index
+                    </span>
+
+                    <strong id="metricSpeedIndex">
+                        —
+                    </strong>
+
+                    <small>
+                        Visual loading speed
+                    </small>
+
+                </div>
+
+
+                <div class="metric-detail-card">
+
+                    <span>
+                        TTI
+                    </span>
+
+                    <strong id="metricTti">
+                        —
+                    </strong>
+
+                    <small>
+                        Time to Interactive
+                    </small>
+
+                </div>
+
+
+                <div class="metric-detail-card">
+
+                    <span>
+                        TBT
+                    </span>
+
+                    <strong id="metricTbt">
+                        —
+                    </strong>
+
+                    <small>
+                        Total Blocking Time
+                    </small>
+
+                </div>
+
+
+                <div class="metric-detail-card">
+
+                    <span>
+                        CLS
+                    </span>
+
+                    <strong id="metricCls">
+                        —
+                    </strong>
+
+                    <small>
+                        Cumulative Layout Shift
+                    </small>
+
                 </div>
 
             </div>
 
-        </div>
-    </div>
+        </section>
 
-    <!-- Performance Metrics -->
-    <div class="col-12">
-        <div class="glass-card p-4">
 
-            <h2 class="h5 fw-bold mb-3">
-                Performance Metrics
-            </h2>
+        <!-- =================================================
+             ACCESSIBILITY
+        ================================================== -->
 
-            <div id="performanceMetrics">
+        <section class="report-card">
 
-                <div class="text-muted">
-                    Loading performance metrics...
+            <div class="report-card-header">
+
+                <div>
+
+                    <span class="report-section-label">
+                        ACCESSIBILITY
+                    </span>
+
+                    <h2>
+                        Accessibility Details
+                    </h2>
+
+                    <p>
+                        Accessibility metrics collected during the audit.
+                    </p>
+
                 </div>
 
             </div>
 
-        </div>
-    </div>
 
-    <!-- UI/UX Findings -->
+            <div
+                class="detail-grid"
+                id="accessibilityDetails"
+            >
+            </div>
 
-    <div class="col-12">
-        <div class="glass-card p-4">
+        </section>
 
-            <h2 class="h5 fw-bold mb-3">
-                UI/UX Analysis
-            </h2>
 
-            <div id="uiuxContent">
+        <!-- =================================================
+             SECURITY
+        ================================================== -->
 
-                <div class="text-muted">
-                    Loading UI/UX information...
+        <section class="report-card">
+
+            <div class="report-card-header">
+
+                <div>
+
+                    <span class="report-section-label">
+                        SECURITY
+                    </span>
+
+                    <h2>
+                        Security Checks
+                    </h2>
+
+                    <p>
+                        Security information returned by the audit.
+                    </p>
+
                 </div>
 
             </div>
 
-        </div>
-    </div>
 
-    <!-- Findings -->
-<!-- AI Recommendations -->
-
-<div class="col-12">
-    <div class="glass-card p-4">
-
-        <h2 class="h5 fw-bold mb-3">
-            AI Recommendations
-        </h2>
-
-        <div id="aiRecommendations">
-
-            <div class="text-muted">
-                Loading recommendations...
+            <div
+                id="securityChecksContent"
+                class="security-list"
+            >
             </div>
 
-        </div>
+        </section>
 
-    </div>
-</div>
 
-<!-- Findings & Recommendations -->
+        <!-- =================================================
+             MOBILE
+        ================================================== -->
 
-<div class="col-12">
-    <div class="glass-card p-4">
+        <section class="report-card">
 
-        <h2 class="h5 fw-bold mb-3">
-            Findings & Recommendations
-        </h2>
+            <div class="report-card-header">
 
-        <div class="table-responsive">
+                <div>
 
-            <table class="table table-hover audit-table">
+                    <span class="report-section-label">
+                        MOBILE
+                    </span>
 
-                <thead>
-                    <tr>
-                        <th>Category</th>
-                        <th>Issue</th>
-                        <th>Recommendation</th>
-                        <th>Priority</th>
-                    </tr>
-                </thead>
+                    <h2>
+                        Mobile Experience
+                    </h2>
 
-                <tbody id="findingsTable">
-                </tbody>
+                    <p>
+                        Mobile usability metrics from the audit.
+                    </p>
 
-            </table>
+                </div>
 
-        </div>
+            </div>
 
-    </div>
-</div>
 
-</div>
+            <div
+                id="mobileDetails"
+                class="detail-grid"
+            >
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PAGE DETAILS
+        ================================================== -->
+
+        <section class="report-card">
+
+            <div class="report-card-header">
+
+                <div>
+
+                    <span class="report-section-label">
+                        WEBSITE DETAILS
+                    </span>
+
+                    <h2>
+                        Technical Overview
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="pageDetails"
+                class="technical-grid"
+            >
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             AI RECOMMENDATIONS
+        ================================================== -->
+
+        <section class="report-card">
+
+            <div class="report-card-header">
+
+                <div>
+
+                    <span class="report-section-label">
+                        AI INSIGHTS
+                    </span>
+
+                    <h2>
+                        AI Recommendations
+                    </h2>
+
+                    <p>
+                        Prioritized recommendations generated from the audit findings.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="aiRecommendations"
+                class="recommendation-grid"
+            >
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             FINDINGS
+        ================================================== -->
+
+        <section class="report-card">
+
+            <div class="report-card-header">
+
+                <div>
+
+                    <span class="report-section-label">
+                        AUDIT FINDINGS
+                    </span>
+
+                    <h2>
+                        Findings & Recommendations
+                    </h2>
+
+                    <p>
+                        Detailed issues detected during the audit.
+                    </p>
+
+                </div>
+
+                <span
+                    class="finding-count"
+                    id="findingCount"
+                >
+                    0 findings
+                </span>
+
+            </div>
+
+
+            <div
+                id="findingsTable"
+                class="findings-list"
+            >
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             REPORT FOOTER
+        ================================================== -->
+
+        <footer class="report-footer">
+
+            <div>
+
+                <strong>
+                    AI Audit
+                </strong>
+
+                <span>
+                    Website Intelligence
+                </span>
+
+            </div>
+
+            <span>
+                Audit #{{ audit_id }}
+            </span>
+
+        </footer>
+
+    </section>
 
 </main>
+
+
+<script
+    src="/static/js/report.js?v=2"
+    defer
+></script>
+
 {% endblock %}

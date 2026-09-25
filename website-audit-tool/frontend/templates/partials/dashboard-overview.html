@@ -1,0 +1,823 @@
+<!-- ==========================================================
+     AI AUDIT TOOL
+     DASHBOARD OVERVIEW
+========================================================== -->
+
+<section
+    class="dashboard-overview"
+    id="dashboardOverview"
+>
+
+
+    <!-- ======================================================
+         WELCOME HEADER
+    ======================================================= -->
+
+    <section class="dashboard-welcome">
+
+        <div class="dashboard-welcome-content">
+
+            <span class="dashboard-eyebrow">
+                <i class="bi bi-stars"></i>
+                Website Intelligence
+            </span>
+
+            <h2>
+                Welcome back,
+                <span id="dashboardWelcomeName">
+                    Rohan
+                </span>
+            </h2>
+
+            <p>
+                Monitor your website health and track your
+                latest audit performance from one place.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================================
+         KPI CARDS
+    ======================================================= -->
+
+    <section
+        class="dashboard-kpi-grid"
+        aria-label="Dashboard statistics"
+    >
+
+
+        <!-- TOTAL AUDITS -->
+
+        <article class="dashboard-kpi-card">
+
+            <div class="dashboard-kpi-top">
+
+                <div class="dashboard-kpi-icon blue">
+
+                    <i class="bi bi-globe2"></i>
+
+                </div>
+
+                <span class="dashboard-kpi-label">
+                    Total Audits
+                </span>
+
+            </div>
+
+
+            <div
+                class="dashboard-kpi-value"
+                id="dashboardTotalAudits"
+            >
+                0
+            </div>
+
+
+            <div class="dashboard-kpi-description">
+
+                Websites analyzed
+
+            </div>
+
+        </article>
+
+
+
+        <!-- AVERAGE SCORE -->
+
+        <article class="dashboard-kpi-card">
+
+            <div class="dashboard-kpi-top">
+
+                <div class="dashboard-kpi-icon indigo">
+
+                    <i class="bi bi-speedometer2"></i>
+
+                </div>
+
+                <span class="dashboard-kpi-label">
+                    Average Score
+                </span>
+
+            </div>
+
+
+            <div class="dashboard-kpi-value-row">
+
+                <div
+                    class="dashboard-kpi-value"
+                    id="dashboardAverageScore"
+                >
+                    0
+                </div>
+
+                <span class="dashboard-kpi-unit">
+                    /100
+                </span>
+
+            </div>
+
+
+            <div class="dashboard-kpi-description">
+
+                Overall website health
+
+            </div>
+
+        </article>
+
+
+
+        <!-- SEO -->
+
+        <article class="dashboard-kpi-card">
+
+            <div class="dashboard-kpi-top">
+
+                <div class="dashboard-kpi-icon violet">
+
+                    <i class="bi bi-search"></i>
+
+                </div>
+
+                <span class="dashboard-kpi-label">
+                    Average SEO
+                </span>
+
+            </div>
+
+
+            <div class="dashboard-kpi-value-row">
+
+                <div
+                    class="dashboard-kpi-value"
+                    id="dashboardAverageSeo"
+                >
+                    0
+                </div>
+
+                <span class="dashboard-kpi-unit">
+                    /100
+                </span>
+
+            </div>
+
+
+            <div class="dashboard-kpi-description">
+
+                Search optimization
+
+            </div>
+
+        </article>
+
+
+
+        <!-- PERFORMANCE -->
+
+        <article class="dashboard-kpi-card">
+
+            <div class="dashboard-kpi-top">
+
+                <div class="dashboard-kpi-icon green">
+
+                    <i class="bi bi-lightning-charge"></i>
+
+                </div>
+
+                <span class="dashboard-kpi-label">
+                    Performance
+                </span>
+
+            </div>
+
+
+            <div class="dashboard-kpi-value-row">
+
+                <div
+                    class="dashboard-kpi-value"
+                    id="dashboardAveragePerformance"
+                >
+                    0
+                </div>
+
+                <span class="dashboard-kpi-unit">
+                    /100
+                </span>
+
+            </div>
+
+
+            <div class="dashboard-kpi-description">
+
+                Speed and responsiveness
+
+            </div>
+
+        </article>
+
+
+    </section>
+
+
+
+    <!-- ======================================================
+         MAIN ANALYTICS GRID
+    ======================================================= -->
+
+    <section class="dashboard-analytics-grid">
+
+
+        <!-- ==================================================
+             PERFORMANCE CHART
+        =================================================== -->
+
+        <article class="dashboard-panel dashboard-chart-panel">
+
+            <div class="dashboard-panel-header">
+
+                <div>
+
+                    <span class="dashboard-panel-eyebrow">
+                        Audit Analytics
+                    </span>
+
+                    <h3>
+                        Score Performance
+                    </h3>
+
+                </div>
+
+
+                <select
+                    id="dashboardChartPeriod"
+                    class="dashboard-period-select"
+                    aria-label="Chart period"
+                >
+
+                    <option value="7d">
+                        Last 7 days
+                    </option>
+
+                    <option
+                        value="30d"
+                        selected
+                    >
+                        Last 30 days
+                    </option>
+
+                    <option value="90d">
+                        Last 90 days
+                    </option>
+
+                    <option value="365d">
+                        Last year
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="dashboard-chart-container">
+
+                <canvas
+                    id="dashboardScoreChart"
+                ></canvas>
+
+                <div
+                    id="dashboardChartEmpty"
+                    class="dashboard-chart-empty"
+                    hidden
+                >
+
+                    <i class="bi bi-bar-chart-line"></i>
+
+                    <h4>
+                        No audit history yet
+                    </h4>
+
+                    <p>
+                        Run a website audit to start
+                        building your score history.
+                    </p>
+
+                    <a href="/audits/new">
+                        Start your first audit
+                    </a>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ==================================================
+             WEBSITE HEALTH
+        =================================================== -->
+
+        <article class="dashboard-panel dashboard-health-panel">
+
+            <div class="dashboard-panel-header">
+
+                <div>
+
+                    <span class="dashboard-panel-eyebrow">
+                        Website Health
+                    </span>
+
+                    <h3>
+                        Average Scores
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-health-list">
+
+
+                <!-- SEO -->
+
+                <div class="dashboard-health-item">
+
+                    <div class="dashboard-health-heading">
+
+                        <div>
+
+                            <i class="bi bi-search"></i>
+
+                            <span>
+                                SEO
+                            </span>
+
+                        </div>
+
+                        <strong
+                            id="healthSeoScore"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="dashboard-progress">
+
+                        <span
+                            id="healthSeoBar"
+                            style="width:0%"
+                        ></span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PERFORMANCE -->
+
+                <div class="dashboard-health-item">
+
+                    <div class="dashboard-health-heading">
+
+                        <div>
+
+                            <i class="bi bi-lightning-charge"></i>
+
+                            <span>
+                                Performance
+                            </span>
+
+                        </div>
+
+                        <strong
+                            id="healthPerformanceScore"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="dashboard-progress">
+
+                        <span
+                            id="healthPerformanceBar"
+                            style="width:0%"
+                        ></span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ACCESSIBILITY -->
+
+                <div class="dashboard-health-item">
+
+                    <div class="dashboard-health-heading">
+
+                        <div>
+
+                            <i class="bi bi-universal-access"></i>
+
+                            <span>
+                                Accessibility
+                            </span>
+
+                        </div>
+
+                        <strong
+                            id="healthAccessibilityScore"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="dashboard-progress">
+
+                        <span
+                            id="healthAccessibilityBar"
+                            style="width:0%"
+                        ></span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SECURITY -->
+
+                <div class="dashboard-health-item">
+
+                    <div class="dashboard-health-heading">
+
+                        <div>
+
+                            <i class="bi bi-shield-check"></i>
+
+                            <span>
+                                Security
+                            </span>
+
+                        </div>
+
+                        <strong
+                            id="healthSecurityScore"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="dashboard-progress">
+
+                        <span
+                            id="healthSecurityBar"
+                            style="width:0%"
+                        ></span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- MOBILE -->
+
+                <div class="dashboard-health-item">
+
+                    <div class="dashboard-health-heading">
+
+                        <div>
+
+                            <i class="bi bi-phone"></i>
+
+                            <span>
+                                Mobile
+                            </span>
+
+                        </div>
+
+                        <strong
+                            id="healthMobileScore"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="dashboard-progress">
+
+                        <span
+                            id="healthMobileBar"
+                            style="width:0%"
+                        ></span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </article>
+
+
+    </section>
+
+
+
+    <!-- ======================================================
+         RECENT AUDITS
+    ======================================================= -->
+
+    <section class="dashboard-panel dashboard-recent-panel">
+
+
+        <div class="dashboard-panel-header">
+
+            <div>
+
+                <span class="dashboard-panel-eyebrow">
+                    Audit History
+                </span>
+
+                <h3>
+                    Recent Website Audits
+                </h3>
+
+            </div>
+
+
+            <a
+                href="/history"
+                class="dashboard-view-all"
+            >
+
+                View all
+
+                <i class="bi bi-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+
+        <!-- Loading -->
+
+        <div
+            id="dashboardRecentLoading"
+            class="dashboard-table-loading"
+        >
+
+            <div class="spinner-border spinner-border-sm"></div>
+
+            <span>
+                Loading recent audits...
+            </span>
+
+        </div>
+
+
+        <!-- Table -->
+
+        <div
+            class="dashboard-table-wrapper"
+            id="dashboardRecentTableWrapper"
+            hidden
+        >
+
+            <table class="dashboard-audit-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Website
+                        </th>
+
+                        <th>
+                            Overall
+                        </th>
+
+                        <th>
+                            SEO
+                        </th>
+
+                        <th>
+                            Performance
+                        </th>
+
+                        <th>
+                            Grade
+                        </th>
+
+                        <th>
+                            Date
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody
+                    id="dashboardRecentAudits"
+                ></tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- Empty -->
+
+        <div
+            id="dashboardRecentEmpty"
+            class="dashboard-empty-state"
+            hidden
+        >
+
+            <div class="dashboard-empty-icon">
+
+                <i class="bi bi-globe2"></i>
+
+            </div>
+
+            <h4>
+                No audits yet
+            </h4>
+
+            <p>
+                Run your first website audit to see
+                results here.
+            </p>
+
+            <a
+                href="/audits/new"
+                class="dashboard-primary-button"
+            >
+
+                <i class="bi bi-plus-lg"></i>
+
+                Start New Audit
+
+            </a>
+
+        </div>
+
+
+        <!-- Error -->
+
+        <div
+            id="dashboardRecentError"
+            class="dashboard-empty-state"
+            hidden
+        >
+
+            <div class="dashboard-empty-icon error">
+
+                <i class="bi bi-exclamation-circle"></i>
+
+            </div>
+
+            <h4>
+                Unable to load audits
+            </h4>
+
+            <p>
+                Please refresh the page and try again.
+            </p>
+
+            <button
+                type="button"
+                class="dashboard-secondary-button"
+                id="dashboardRetryButton"
+            >
+
+                <i class="bi bi-arrow-clockwise"></i>
+
+                Retry
+
+            </button>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ======================================================
+         QUICK ACTIONS
+    ======================================================= -->
+
+    <section class="dashboard-quick-actions">
+
+        <a
+            href="/audits/new"
+            class="dashboard-quick-action primary"
+        >
+
+            <span class="dashboard-quick-icon">
+
+                <i class="bi bi-plus-lg"></i>
+
+            </span>
+
+            <span>
+
+                <strong>
+                    Start New Audit
+                </strong>
+
+                <small>
+                    Analyze a website
+                </small>
+
+            </span>
+
+            <i class="bi bi-arrow-right"></i>
+
+        </a>
+
+
+        <a
+            href="/history"
+            class="dashboard-quick-action"
+        >
+
+            <span class="dashboard-quick-icon">
+
+                <i class="bi bi-clock-history"></i>
+
+            </span>
+
+            <span>
+
+                <strong>
+                    Audit History
+                </strong>
+
+                <small>
+                    View previous audits
+                </small>
+
+            </span>
+
+            <i class="bi bi-arrow-right"></i>
+
+        </a>
+
+
+        <a
+            href="/reports"
+            class="dashboard-quick-action"
+        >
+
+            <span class="dashboard-quick-icon">
+
+                <i class="bi bi-file-earmark-text"></i>
+
+            </span>
+
+            <span>
+
+                <strong>
+                    Reports
+                </strong>
+
+                <small>
+                    Open generated reports
+                </small>
+
+            </span>
+
+            <i class="bi bi-arrow-right"></i>
+
+        </a>
+
+    </section>
+
+
+</section>

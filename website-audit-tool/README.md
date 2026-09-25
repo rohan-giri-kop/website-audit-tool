@@ -1,6 +1,6 @@
 # AI Website Audit Tool
 
-Modern SaaS-style website audit platform built with FastAPI, SQLAlchemy, Jinja2, Bootstrap 5.3, Chart.js, AOS, Requests, BeautifulSoup4, and ReportLab.
+Modern SaaS-style website audit platform built with FastAPI, SQLAlchemy, Jinja2, Bootstrap 5.3, chart.js, AOS, Requests, BeautifulSoup4, and ReportLab.
 
 ## Features
 

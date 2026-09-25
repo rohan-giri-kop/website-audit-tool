@@ -1,19 +1,399 @@
 {% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/css/login.css">
+{% endblock %}
+
 {% block body %}
-<main class="auth-screen d-flex align-items-center justify-content-center">
-  <div class="auth-card glass-card p-4 p-md-5 shadow-lg" data-aos="zoom-in">
-    <h1 class="fw-bold mb-2">Welcome back</h1>
-    <p class="text-muted mb-4">Sign in to access your audits and reports.</p>
-    <form id="loginForm" class="d-grid gap-3">
-      <input class="form-control form-control-lg" type="email" id="loginEmail" placeholder="Email" required>
-      <input class="form-control form-control-lg" type="password" id="loginPassword" placeholder="Password" required>
-      <div class="d-flex justify-content-between align-items-center small text-muted">
-        <label class="form-check-label"><input class="form-check-input me-2" type="checkbox"> Remember me</label>
-        <a href="#" class="link-secondary text-decoration-none">Forgot password?</a>
-      </div>
-      <button class="btn btn-primary btn-lg" type="submit">Login</button>
-    </form>
-    <p class="mt-4 mb-0 text-muted">New here? <a href="/register">Create an account</a></p>
-  </div>
-</main>
+
+<!-- =========================================
+     BACK TO HOME
+========================================= -->
+
+<a href="/" class="back-home-btn">
+
+    <i class="bi bi-arrow-left"></i>
+
+    <span>Back to Home</span>
+
+</a>
+
+<!-- =========================================
+     LOGIN SECTION
+========================================= -->
+
+<section class="login-section">
+
+    <div class="container">
+
+        <div class="login-wrapper">
+
+            <!-- =========================================
+                 LEFT BRANDING PANEL
+            ========================================= -->
+
+            <div class="login-left">
+
+                <div class="brand-badge">
+
+                    <i class="bi bi-stars"></i>
+
+                    AI Website Audit Platform
+
+                </div>
+
+                <h1>
+
+                    Welcome Back to Your
+                    AI Audit Workspace
+
+                </h1>
+
+                <p>
+
+                    Sign in to continue auditing websites,
+                    monitor performance, generate AI-powered
+                    reports, and improve SEO, Security,
+                    Accessibility, and User Experience.
+
+                </p>
+
+                <!-- Feature List -->
+
+                <div class="feature-list">
+
+                    <div class="feature-item">
+
+                        <div class="feature-icon">
+
+                            <i class="bi bi-cpu-fill"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h5>AI Recommendations</h5>
+
+                            <span>Receive intelligent suggestions instantly.</span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="feature-item">
+
+                        <div class="feature-icon">
+
+                            <i class="bi bi-speedometer2"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h5>Performance Monitoring</h5>
+
+                            <span>Track Core Web Vitals and Lighthouse scores.</span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="feature-item">
+
+                        <div class="feature-icon">
+
+                            <i class="bi bi-shield-lock-fill"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h5>Security Analysis</h5>
+
+                            <span>HTTPS, SSL and header validation.</span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="feature-item">
+
+                        <div class="feature-icon">
+
+                            <i class="bi bi-file-earmark-pdf-fill"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h5>Professional Reports</h5>
+
+                            <span>Download premium PDF reports with charts.</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Trust Card -->
+
+                <div class="login-info-card">
+
+                    <div class="rating">
+
+                        ⭐⭐⭐⭐⭐
+
+                    </div>
+
+                    <h4>
+
+                        Trusted by Developers Worldwide
+
+                    </h4>
+
+                    <p>
+
+                        Thousands of developers and businesses
+                        rely on AI Website Audit Tool to improve
+                        website quality every day.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- =========================================
+                 RIGHT LOGIN PANEL
+            ========================================= -->
+
+            <div class="login-right">
+
+                <div class="login-card">
+
+                    <!-- Header -->
+
+                    <div class="form-header">
+
+                        <span class="form-badge">
+
+                            Welcome Back
+
+                        </span>
+
+                        <h2>
+
+                            Sign In
+
+                        </h2>
+
+                        <p>
+
+                            Login to access your dashboard,
+                            reports and AI website audits.
+
+                        </p>
+
+                    </div>
+
+                    <!-- Login Form -->
+
+                    <form id="loginForm">
+
+                        <!-- Email -->
+
+                        <div class="form-group">
+
+                            <label>Email Address</label>
+
+                            <div class="input-box">
+
+                                <i class="bi bi-envelope-fill"></i>
+
+                                <input
+                                    id="loginEmail"
+                                    name="email"
+                                    type="email"
+                                    autocomplete="email"
+                                    required
+                                    placeholder="name@example.com">
+
+                            </div>
+
+                            <small
+                                id="emailError"
+                                class="error-text"></small>
+
+                        </div>
+
+                        <!-- Password -->
+
+                        <div class="form-group">
+
+                            <label>Password</label>
+
+                            <div class="input-box">
+
+                                <i class="bi bi-lock-fill"></i>
+
+                                <input
+                                    id="loginPassword"
+                                    name="password"
+                                    type="password"
+                                    autocomplete="current-password"
+                                    required
+                                    placeholder="Enter your password">
+
+                                <button
+                                    type="button"
+                                    class="toggle-password">
+
+                                    <i class="bi bi-eye-fill"></i>
+
+                                </button>
+
+                            </div>
+
+                            <small
+                                id="passwordError"
+                                class="error-text"></small>
+
+                        </div>
+
+                                                <!-- =========================================
+                             REMEMBER ME & FORGOT PASSWORD
+                        ========================================= -->
+
+                        <div class="login-options">
+
+                            <div class="remember-me">
+
+                                <input
+                                    id="rememberMe"
+                                    type="checkbox">
+
+                                <label for="rememberMe">
+
+                                    Remember Me
+
+                                </label>
+
+                            </div>
+
+                            <a href="/forgot-password" class="forgot-link">
+                                Forgot Password?
+                            </a>
+
+                        </div>
+
+                        <!-- =========================================
+                             LOGIN BUTTON
+                        ========================================= -->
+
+                        <button
+                            id="loginBtn"
+                            class="login-btn"
+                            type="submit">
+
+                            <i class="bi bi-box-arrow-in-right"></i>
+
+                            <span>
+
+                                Sign In
+
+                            </span>
+
+                        </button>
+
+                    </form>
+
+                    <!-- =========================================
+                         DIVIDER
+                    ========================================= -->
+
+                    <div class="divider">
+
+                        <span>
+
+                            OR CONTINUE WITH
+
+                        </span>
+
+                    </div>
+
+                    <!-- =========================================
+                         SOCIAL LOGIN
+                    ========================================= -->
+
+                    <div class="social-buttons">
+
+                        <button
+                            class="social-btn"
+                            type="button"
+                            disabled>
+
+                            <i class="bi bi-google"></i>
+
+                            Google
+
+                            <small>
+
+                                Coming Soon
+
+                            </small>
+
+                        </button>
+
+                        <button
+                            class="social-btn"
+                            type="button"
+                            disabled>
+
+                            <i class="bi bi-github"></i>
+
+                            GitHub
+
+                            <small>
+
+                                Coming Soon
+
+                            </small>
+
+                        </button>
+
+                    </div>
+
+                    <!-- =========================================
+                         FOOTER
+                    ========================================= -->
+
+                    <div class="login-footer">
+
+                        Don't have an account?
+
+                        <a href="/register">
+
+                            Create Account
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% block scripts %}
+
+<script src="/static/js/login.js"></script>
+
+{% endblock %}
+
 {% endblock %}

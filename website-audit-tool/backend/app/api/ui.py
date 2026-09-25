@@ -1,7 +1,10 @@
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-
+from fastapi import Depends
+from sqlalchemy.orm import Session
+from backend.app.database.session import get_db
+from backend.app.models.user import User
 
 router = APIRouter()
 from pathlib import Path
@@ -43,17 +46,38 @@ def register(request: Request):
         }
     )    
     
-@router.get("/dashboard", response_class=HTMLResponse)
+@router.get("/forgot-password", response_class=HTMLResponse)
+def forgot_password(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="forgot_password.html",
+        context={
+            "page_title": "Forgot Password"
+        }
+    )
+    
+@router.get("/reset-password", response_class=HTMLResponse)
+def reset_password_page(request: Request):
+
+    return templates.TemplateResponse(
+        request=request,
+        name="reset_password.html",
+        context={
+            "page_title": "Reset Password"
+        }
+    )
+    
+@router.get("/dashboard")
 def dashboard(request: Request):
+
     return templates.TemplateResponse(
         request=request,
         name="dashboard.html",
         context={
-            "page_title": "Dashboard"
+            "page_title":"Dashboard"
         }
-    )
-
-
+    )    
+    
 @router.get("/audits/new", response_class=HTMLResponse)
 def new_audit(request: Request):
     return templates.TemplateResponse(

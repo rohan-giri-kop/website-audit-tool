@@ -1,0 +1,1462 @@
+/* ==========================================================
+    SIDEBAR MENU
+========================================================== */
+
+/* ==========================
+   Sidebar Container
+========================== */
+
+.dashboard-sidebar {
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:300px;
+
+    min-width:300px;
+
+    height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    background:#FFFFFF;
+
+    border-right:1px solid #E2E8F0;
+
+    z-index:1500;
+
+    overflow:visible;
+
+    transition:
+
+        width .25s ease,
+
+        transform .25s ease;
+
+}
+
+
+/* ==========================
+   Sidebar Header
+========================== */
+
+.sidebar-header {
+
+    height:90px;
+
+    min-height:90px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 20px 0 24px;
+
+    background:#FFFFFF;
+
+    border-bottom:1px solid #E2E8F0;
+
+    box-sizing:border-box;
+
+    flex-shrink:0;
+
+}
+
+/* ==========================
+   Sidebar Brand
+========================== */
+
+.sidebar-brand {
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    height:48px;
+
+    min-width:0;
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+/* ==========================
+   Sidebar Logo
+========================== */
+
+.sidebar-logo {
+
+    width:48px;
+
+    height:48px;
+
+    min-width:48px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:14px;
+
+    background:linear-gradient(
+        135deg,
+        #4F46E5,
+        #2563EB
+    );
+
+    color:#FFFFFF;
+
+    font-size:1.25rem;
+
+    box-shadow:
+        0 8px 20px rgba(37,99,235,.18);
+
+}
+
+/* ==========================
+   Brand Text
+========================== */
+
+.sidebar-brand-text {
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    min-width:0;
+
+}
+
+
+.sidebar-brand-name {
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    line-height:1.2;
+
+    color:#0F172A;
+
+}
+
+
+.sidebar-brand-subtitle {
+
+    margin-top:4px;
+
+    font-size:.68rem;
+
+    font-weight:500;
+
+    line-height:1.2;
+
+    color:#64748B;
+
+    white-space:nowrap;
+
+}
+
+
+/* ==========================
+   Collapse Button
+========================== */
+
+.sidebar-collapse-btn {
+
+    width:36px;
+
+    height:36px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-shrink:0;
+
+    padding:0;
+
+    border:1px solid #E2E8F0;
+
+    border-radius:10px;
+
+    background:#FFFFFF;
+
+    color:#64748B;
+
+    cursor:pointer;
+
+    transition:
+
+        background .2s ease,
+
+        border-color .2s ease,
+
+        color .2s ease,
+
+        box-shadow .2s ease;
+
+}
+
+.sidebar-collapse-btn:hover {
+
+    background:#F8FAFC;
+
+    border-color:#CBD5E1;
+
+    color:#2563EB;
+
+    box-shadow:
+        0 4px 12px rgba(15,23,42,.06);
+
+}
+
+.sidebar-collapse-btn i {
+
+    font-size:.85rem;
+
+}
+
+
+/* ==========================
+   Sidebar Content
+========================== */
+
+.sidebar-content {
+
+    flex:1;
+
+    min-height:0;
+
+    padding:24px 16px;
+
+    overflow-y:auto;
+
+}
+
+/* ==========================================================
+   SIDEBAR SCROLL ISOLATION
+========================================================== */
+
+.dashboard-sidebar {
+    overflow: hidden;
+}
+
+.dashboard-sidebar .sidebar-content {
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+/* ==========================
+   Sidebar Scrollbar
+========================== */
+
+.sidebar-content::-webkit-scrollbar {
+
+    width:5px;
+
+}
+
+
+.sidebar-content::-webkit-scrollbar-track {
+
+    background:transparent;
+
+}
+
+
+.sidebar-content::-webkit-scrollbar-thumb {
+
+    background:#CBD5E1;
+
+    border-radius:10px;
+
+}
+
+
+/* Keep header visible */
+
+.dashboard-sidebar.collapsed .sidebar-header {
+
+    position:relative;
+    width:104px;
+    height:90px;
+    min-height:90px;
+
+    justify-content:center;
+
+    padding:0 14px;
+
+    overflow:visible;
+}
+
+/* Keep logo visible */
+
+.dashboard-sidebar.collapsed .sidebar-brand {
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+
+/* Hide only the text */
+
+.dashboard-sidebar.collapsed .sidebar-brand-text {
+
+    display:none;
+
+}
+
+
+/* Move collapse button to the sidebar edge */
+
+/* ==========================================================
+   COLLAPSED SIDEBAR — EXPAND BUTTON
+   Position: right edge + vertically centered
+========================================================== */
+
+.dashboard-sidebar.collapsed .sidebar-collapse-btn {
+
+    position: fixed;
+
+    /* Center exactly on the right edge of 100px sidebar */
+    left: var(--sidebar-collapsed-width);
+
+    /* Vertical position */
+    top: 50%;
+
+    /* Move button back by half of its own size */
+    transform: translate(-50%, -50%);
+
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+
+    background: #FFFFFF;
+    color: #64748B;
+
+    box-shadow:
+        0 4px 12px rgba(15,23,42,.12);
+
+    z-index: 3000;
+
+    cursor: pointer;
+    pointer-events: auto;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        box-shadow .2s ease;
+}
+
+
+/* Hover */
+
+.dashboard-sidebar.collapsed
+.sidebar-collapse-btn:hover {
+
+    background: #F8FAFC;
+
+    border-color: #BFDBFE;
+
+    color: #2563EB;
+
+    box-shadow:
+        0 6px 16px rgba(15,23,42,.14);
+}
+
+
+/* Icon */
+
+.dashboard-sidebar.collapsed
+.sidebar-collapse-btn i {
+
+    font-size: .9rem;
+
+    line-height: 1;
+
+}
+
+/* ==========================================================
+   EXPANDED SIDEBAR — NORMAL BUTTON
+========================================================== */
+
+.dashboard-sidebar:not(.collapsed)
+.sidebar-collapse-btn {
+
+    position:relative;
+
+    top:auto;
+    right:auto;
+
+    transform:none;
+
+    width:36px;
+    height:36px;
+
+    min-width:36px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+
+    padding:0;
+
+    border:1px solid #E2E8F0;
+
+    border-radius:10px;
+
+    background:#FFFFFF;
+
+    color:#64748B;
+
+    box-shadow:none;
+
+    z-index:1300;
+}
+
+/* ==========================
+   Responsive Foundation
+========================== */
+
+@media (max-width: 991px) {
+
+    .dashboard-sidebar {
+
+        transform:translateX(-100%);
+
+    }
+
+
+    .dashboard-sidebar.mobile-open {
+
+        transform:translateX(0);
+
+    }
+
+}
+
+
+/* ==========================================================
+   SIDEBAR — PART 2
+   Navigation
+========================================================== */
+
+
+/* ==========================
+   Sidebar Content
+========================== */
+
+.sidebar-content {
+
+    flex:1;
+
+    min-height:0;
+
+    padding:24px 16px;
+
+    overflow-y:auto;
+
+}
+
+
+/* ==========================
+   Navigation Section
+========================== */
+
+.sidebar-section {
+
+    width:100%;
+
+}
+
+
+/* ==========================
+   Section Title
+========================== */
+
+.sidebar-section-title {
+
+    padding:0 12px;
+
+    margin-bottom:10px;
+
+    font-size:.68rem;
+
+    font-weight:700;
+
+    line-height:1.2;
+
+    letter-spacing:.09em;
+
+    text-transform:uppercase;
+
+    color:#94A3B8;
+
+}
+
+
+/* ==========================
+   Navigation List
+========================== */
+
+.sidebar-nav {
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:4px;
+
+}
+
+
+/* ==========================
+   Navigation Item
+========================== */
+
+.sidebar-nav-item {
+
+    position:relative;
+
+    width:100%;
+
+    min-height:46px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:0 12px;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+    color:#475569;
+
+    font-size:.88rem;
+
+    font-weight:500;
+
+    box-sizing:border-box;
+
+    transition:
+
+        background .2s ease,
+
+        color .2s ease,
+
+        transform .2s ease;
+
+}
+
+
+/* ==========================
+   Navigation Icon
+========================== */
+
+.sidebar-nav-icon {
+
+    width:22px;
+
+    min-width:22px;
+
+    height:22px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#64748B;
+
+    font-size:1rem;
+
+    transition:
+
+        color .2s ease;
+
+}
+
+
+/* ==========================
+   Navigation Label
+========================== */
+
+.sidebar-nav-label {
+
+    flex:1;
+
+    min-width:0;
+
+    white-space:nowrap;
+
+}
+
+
+/* ==========================
+   Hover
+========================== */
+
+.sidebar-nav-item:hover {
+
+    background:#F8FAFC;
+
+    color:#2563EB;
+
+}
+
+
+.sidebar-nav-item:hover .sidebar-nav-icon {
+
+    color:#2563EB;
+
+}
+
+
+/* ==========================
+   Active Navigation
+========================== */
+
+.sidebar-nav-item.active {
+
+    background:#EEF2FF;
+
+    color:#2563EB;
+
+    font-weight:600;
+
+}
+
+
+.sidebar-nav-item.active .sidebar-nav-icon {
+
+    color:#2563EB;
+
+}
+
+
+/* Small active indicator */
+
+.sidebar-nav-item.active::before {
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:9px;
+
+    width:3px;
+
+    height:28px;
+
+    border-radius:0 4px 4px 0;
+
+    background:#2563EB;
+
+}
+
+
+/* ==========================
+   Notification Badge
+========================== */
+
+.sidebar-nav-badge {
+
+    min-width:20px;
+
+    height:20px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:0 6px;
+
+    border-radius:10px;
+
+    background:#EF4444;
+
+    color:#FFFFFF;
+
+    font-size:.65rem;
+
+    font-weight:700;
+
+    line-height:1;
+
+}
+
+
+/* ==========================
+   Section Divider
+========================== */
+
+.sidebar-divider {
+
+    height:1px;
+
+    margin:20px 10px;
+
+    background:#E2E8F0;
+
+}
+
+
+/* ==========================================================
+   COLLAPSED SIDEBAR
+========================================================== */
+
+.dashboard-sidebar.collapsed .sidebar-content {
+
+    padding:24px 12px;
+
+}
+
+
+/* Hide section headings */
+
+.dashboard-sidebar.collapsed
+.sidebar-section-title {
+
+    display:none;
+
+}
+
+
+/* Center navigation items */
+
+.dashboard-sidebar.collapsed
+.sidebar-nav-item {
+
+    justify-content:center;
+
+    gap:0;
+
+    padding:0;
+
+}
+
+
+/* Hide labels */
+
+.dashboard-sidebar.collapsed
+.sidebar-nav-label {
+
+    display:none;
+
+}
+
+
+/* Larger icon area */
+
+.dashboard-sidebar.collapsed
+.sidebar-nav-icon {
+
+    width:22px;
+
+    min-width:22px;
+
+}
+
+
+/* Hide badge text in collapsed mode */
+
+.dashboard-sidebar.collapsed
+.sidebar-nav-badge {
+
+    position:absolute;
+
+    top:3px;
+
+    right:3px;
+
+    min-width:17px;
+
+    height:17px;
+
+    padding:0 4px;
+
+    border-radius:9px;
+
+    font-size:.58rem;
+
+}
+
+
+/* Active indicator in collapsed mode */
+
+.dashboard-sidebar.collapsed
+.sidebar-nav-item.active::before {
+
+    left:0;
+
+    top:9px;
+
+    height:28px;
+
+}
+
+
+/* Divider in collapsed mode */
+
+.dashboard-sidebar.collapsed
+.sidebar-divider {
+
+    margin:18px 4px;
+
+}
+
+
+/* ==========================================================
+   SIDEBAR USER — PART 3
+========================================================== */
+
+
+/* ==========================
+   User Container
+========================== */
+
+.sidebar-user {
+
+    position:relative;
+
+    flex-shrink:0;
+
+    padding:14px 16px;
+
+    border-top:1px solid #E2E8F0;
+
+    background:#FFFFFF;
+
+}
+
+
+/* ==========================
+   User Button
+========================== */
+
+.sidebar-user-button {
+
+    width:100%;
+
+    min-height:58px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:8px 10px;
+
+    border:1px solid transparent;
+
+    border-radius:12px;
+
+    background:transparent;
+
+    color:#0F172A;
+
+    cursor:pointer;
+
+    text-align:left;
+
+    transition:
+
+        background .2s ease,
+
+        border-color .2s ease;
+
+}
+
+
+.sidebar-user-button:hover {
+
+    background:#F8FAFC;
+
+    border-color:#E2E8F0;
+
+}
+
+
+/* ==========================
+   User Avatar
+========================== */
+
+.sidebar-user-avatar {
+
+    width:40px;
+
+    height:40px;
+
+    min-width:40px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:linear-gradient(
+        135deg,
+        #4F46E5,
+        #2563EB
+    );
+
+    color:#FFFFFF;
+
+    font-size:.78rem;
+
+    font-weight:700;
+
+    letter-spacing:.02em;
+
+}
+
+
+/* ==========================
+   User Information
+========================== */
+
+.sidebar-user-info {
+
+    flex:1;
+
+    min-width:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+}
+
+
+.sidebar-user-name {
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+    font-size:.86rem;
+
+    font-weight:700;
+
+    line-height:1.3;
+
+    color:#0F172A;
+
+}
+
+
+.sidebar-user-role {
+
+    margin-top:3px;
+
+    font-size:.70rem;
+
+    font-weight:500;
+
+    line-height:1.2;
+
+    color:#64748B;
+
+}
+
+
+/* ==========================
+   User Arrow
+========================== */
+
+.sidebar-user-arrow {
+
+    width:28px;
+
+    height:28px;
+
+    min-width:28px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#64748B;
+
+    transition:transform .2s ease;
+
+}
+
+
+.sidebar-user-button[aria-expanded="true"]
+.sidebar-user-arrow {
+
+    transform:rotate(180deg);
+
+}
+
+
+/* ==========================
+   User Dropdown
+========================== */
+
+.sidebar-user-dropdown {
+
+    position:absolute;
+
+    left:16px;
+
+    right:16px;
+
+    bottom:82px;
+
+    display:none;
+
+    padding:6px;
+
+    background:#FFFFFF;
+
+    border:1px solid #E2E8F0;
+
+    border-radius:14px;
+
+    box-shadow:
+        0 18px 40px rgba(15,23,42,.12);
+
+    z-index:1400;
+
+}
+
+
+.sidebar-user-dropdown.show {
+
+    display:block;
+
+}
+
+
+/* ==========================
+   Dropdown Item
+========================== */
+
+.sidebar-user-dropdown-item {
+
+    width:100%;
+
+    min-height:42px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    padding:0 12px;
+
+    border:none;
+
+    border-radius:9px;
+
+    background:transparent;
+
+    color:#334155;
+
+    text-decoration:none;
+
+    font-size:.84rem;
+
+    font-weight:500;
+
+    cursor:pointer;
+
+    text-align:left;
+
+}
+
+
+.sidebar-user-dropdown-item:hover {
+
+    background:#F8FAFC;
+
+    color:#2563EB;
+
+}
+
+
+.sidebar-user-dropdown-item i {
+
+    width:18px;
+
+    text-align:center;
+
+    font-size:.95rem;
+
+}
+
+
+/* ==========================
+   Dropdown Divider
+========================== */
+
+.sidebar-user-dropdown-divider {
+
+    height:1px;
+
+    margin:5px 6px;
+
+    background:#E2E8F0;
+
+}
+
+
+/* ==========================
+   Logout
+========================== */
+
+.sidebar-user-dropdown-item.logout {
+
+    color:#DC2626;
+
+}
+
+
+.sidebar-user-dropdown-item.logout:hover {
+
+    background:#FEF2F2;
+
+    color:#DC2626;
+
+}
+
+
+/* ==========================================================
+   COLLAPSED USER SECTION
+========================================================== */
+
+.dashboard-sidebar.collapsed
+.sidebar-user {
+
+    padding:14px 12px;
+
+}
+
+
+.dashboard-sidebar.collapsed
+.sidebar-user-button {
+
+    justify-content:center;
+
+    padding:8px;
+
+}
+
+
+.dashboard-sidebar.collapsed
+.sidebar-user-info {
+
+    display:none;
+
+}
+
+
+.dashboard-sidebar.collapsed
+.sidebar-user-arrow {
+
+    display:none;
+
+}
+
+
+/* Keep only avatar */
+
+.dashboard-sidebar.collapsed
+.sidebar-user-avatar {
+
+    width:40px;
+
+    height:40px;
+
+}
+
+
+/* Dropdown remains usable */
+
+.dashboard-sidebar.collapsed
+.sidebar-user-dropdown {
+
+    left:88px;
+
+    right:auto;
+
+    bottom:12px;
+
+    width:190px;
+
+}
+
+
+/* ==========================================================
+   SIDEBAR — PART 4
+   MOBILE / TABLET
+========================================================== */
+
+
+/* ==========================
+   Mobile Toggle Button
+========================== */
+
+.mobile-sidebar-toggle {
+
+    display:none;
+
+    position:fixed;
+
+    top:18px;
+
+    left:18px;
+
+    width:44px;
+
+    height:44px;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:0;
+
+    border:1px solid #E2E8F0;
+
+    border-radius:12px;
+
+    background:#FFFFFF;
+
+    color:#0F172A;
+
+    box-shadow:
+        0 6px 20px rgba(15,23,42,.08);
+
+    cursor:pointer;
+
+    z-index:1500;
+
+    transition:
+
+        background .2s ease,
+
+        border-color .2s ease,
+
+        color .2s ease;
+
+}
+
+
+.mobile-sidebar-toggle:hover {
+
+    background:#F8FAFC;
+
+    border-color:#CBD5E1;
+
+    color:#2563EB;
+
+}
+
+
+.mobile-sidebar-toggle i {
+
+    font-size:1.2rem;
+
+}
+
+
+/* ==========================
+   Sidebar Overlay
+========================== */
+
+.sidebar-overlay {
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(15,23,42,.40);
+
+    -webkit-backdrop-filter:blur(2px);
+
+    backdrop-filter:blur(2px);
+
+    z-index:1100;
+
+}
+
+
+/* ==========================
+   Tablet / Mobile
+========================== */
+
+@media (max-width:991px) {
+
+    .dashboard-sidebar {
+
+        width:300px;
+
+        min-width:300px;
+
+        transform:translateX(-100%);
+
+        transition:
+            transform .25s ease;
+
+        box-shadow:
+            12px 0 35px rgba(15,23,42,.12);
+
+    }
+
+
+    .dashboard-sidebar.mobile-open {
+
+        transform:translateX(0);
+
+    }
+
+
+    .dashboard-main {
+
+        margin-left:0;
+
+        width:100%;
+
+    }
+
+
+    .mobile-sidebar-toggle {
+
+        display:flex;
+
+    }
+
+
+    .sidebar-overlay {
+
+        display:block;
+
+        opacity:0;
+
+        visibility:hidden;
+
+        pointer-events:none;
+
+        transition:
+
+            opacity .25s ease,
+
+            visibility .25s ease;
+
+    }
+
+
+    .sidebar-overlay.show {
+
+        opacity:1;
+
+        visibility:visible;
+
+        pointer-events:auto;
+
+    }
+
+
+    /*
+       On mobile the desktop collapse button
+       should not be used.
+    */
+
+    .sidebar-collapse-btn {
+
+        display:none;
+
+    }
+
+}
+
+
+/* ==========================
+   Small Mobile
+========================== */
+
+@media (max-width:575px) {
+
+    .dashboard-sidebar {
+
+        width:285px;
+
+        min-width:285px;
+
+    }
+
+
+    .mobile-sidebar-toggle {
+
+        top:14px;
+
+        left:14px;
+
+        width:42px;
+
+        height:42px;
+
+    }
+
+}
