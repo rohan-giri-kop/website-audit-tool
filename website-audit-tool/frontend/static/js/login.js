@@ -1,330 +1,855 @@
 /* ==========================================================
-   AI Website Audit Tool
-   Premium Login Page
+   AI WEBSITE AUDIT TOOL
+   LOGIN JAVASCRIPT
+   ----------------------------------------------------------
+   Responsibilities:
+   - Login validation
+   - Password visibility toggle
+   - POST /api/auth/login
+   - Save JWT token consistently
+   - Verify JWT using /api/auth/me
+   - Redirect to dashboard
+   - Clear old/invalid tokens
 ========================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* ==========================================
+    "use strict";
+
+
+    /* ==========================================================
        ELEMENTS
-    ========================================== */
+    ========================================================== */
 
-    const form = document.getElementById("loginForm");
+    const form =
+        document.getElementById("loginForm");
 
-    if (!form) return;
+    if (!form) {
+        return;
+    }
 
-    const email = document.getElementById("loginEmail");
-    const password = document.getElementById("loginPassword");
 
-    const emailError = document.getElementById("emailError");
-    const passwordError = document.getElementById("passwordError");
+    const email =
+        document.getElementById("loginEmail");
 
-    const rememberMe = document.getElementById("rememberMe");
+    const password =
+        document.getElementById("loginPassword");
 
-    const submitBtn = document.getElementById("loginBtn");
+    const emailError =
+        document.getElementById("emailError");
 
-    /* ==========================================
+    const passwordError =
+        document.getElementById("passwordError");
+
+    const rememberMe =
+        document.getElementById("rememberMe");
+
+    const submitBtn =
+        document.getElementById("loginBtn");
+
+
+    /* ==========================================================
        PASSWORD TOGGLE
-    ========================================== */
+    ========================================================== */
 
-    const passwordInput = document.getElementById("loginPassword");
-    const togglePassword = document.querySelector(".toggle-password");
+    const togglePassword =
+        document.querySelector(".toggle-password");
 
-    if (passwordInput && togglePassword) {
 
-        togglePassword.addEventListener("click", function () {
+    if (
+        password &&
+        togglePassword
+    ) {
 
-            const icon = this.querySelector("i");
+        togglePassword.addEventListener(
+            "click",
+            function () {
 
-            if (passwordInput.type === "password") {
+                const icon =
+                    this.querySelector("i");
 
-                passwordInput.type = "text";
 
-                icon.classList.remove("bi-eye-fill");
-                icon.classList.add("bi-eye-slash-fill");
+                if (
+                    password.type === "password"
+                ) {
 
-            } else {
+                    password.type = "text";
 
-                passwordInput.type = "password";
 
-                icon.classList.remove("bi-eye-slash-fill");
-                icon.classList.add("bi-eye-fill");
+                    if (icon) {
+
+                        icon.classList.remove(
+                            "bi-eye-fill"
+                        );
+
+                        icon.classList.add(
+                            "bi-eye-slash-fill"
+                        );
+
+                    }
+
+                }
+
+                else {
+
+                    password.type = "password";
+
+
+                    if (icon) {
+
+                        icon.classList.remove(
+                            "bi-eye-slash-fill"
+                        );
+
+                        icon.classList.add(
+                            "bi-eye-fill"
+                        );
+
+                    }
+
+                }
 
             }
-
-        });
+        );
 
     }
 
 
-    /* ==========================================
-       HELPERS
-    ========================================== */
+    /* ==========================================================
+       TOKEN STORAGE KEYS
+       ----------------------------------------------------------
+       We use ONLY access_token as the main JWT key.
+    ========================================================== */
+
+    const TOKEN_KEY =
+        "access_token";
+
+
+    const OLD_TOKEN_KEYS = [
+        "token",
+        "auth_token",
+        "audit_token",
+        "accessToken"
+    ];
+
+
+    /* ==========================================================
+       CLEAR OLD AUTHENTICATION
+    ========================================================== */
+
+    function clearOldAuthentication() {
+
+        /* Main token */
+
+        localStorage.removeItem(
+            TOKEN_KEY
+        );
+
+        sessionStorage.removeItem(
+            TOKEN_KEY
+        );
+
+
+        /* Old token names */
+
+        OLD_TOKEN_KEYS.forEach(
+            (key) => {
+
+                localStorage.removeItem(
+                    key
+                );
+
+                sessionStorage.removeItem(
+                    key
+                );
+
+            }
+        );
+
+    }
+
+
+    /* ==========================================================
+       SAVE AUTHENTICATION TOKEN
+    ========================================================== */
+
+    function saveAuthenticationToken(
+        token
+    ) {
+
+        if (!token) {
+
+            throw new Error(
+                "Authentication token was not returned by the server."
+            );
+
+        }
+
+
+        /* Remove all previous tokens */
+
+        clearOldAuthentication();
+
+
+        /* Save new token */
+
+        if (
+            rememberMe &&
+            rememberMe.checked
+        ) {
+
+            localStorage.setItem(
+                TOKEN_KEY,
+                token
+            );
+
+        }
+
+        else {
+
+            sessionStorage.setItem(
+                TOKEN_KEY,
+                token
+            );
+
+        }
+
+
+        console.log(
+            "[Login] JWT token saved."
+        );
+
+    }
+
+
+    /* ==========================================================
+       GET CURRENT TOKEN
+    ========================================================== */
+
+    function getAuthenticationToken() {
+
+        return (
+            localStorage.getItem(
+                TOKEN_KEY
+            ) ||
+            sessionStorage.getItem(
+                TOKEN_KEY
+            ) ||
+            ""
+        );
+
+    }
+
+
+    /* ==========================================================
+       AUTH HEADERS
+    ========================================================== */
+
+    function getAuthHeaders() {
+
+        const token =
+            getAuthenticationToken();
+
+
+        if (!token) {
+
+            return {
+                "Accept":
+                    "application/json"
+            };
+
+        }
+
+
+        return {
+
+            "Accept":
+                "application/json",
+
+            "Authorization":
+                `Bearer ${token}`
+
+        };
+
+    }
+
+
+    /* ==========================================================
+       CLEAR FORM ERRORS
+    ========================================================== */
 
     function clearErrors() {
 
-        document.querySelectorAll(".error-text")
-            .forEach(el => {
+        document
+            .querySelectorAll(
+                ".error-text"
+            )
+            .forEach(
+                (element) => {
 
-                el.textContent = "";
-                el.classList.remove("show");
+                    element.textContent =
+                        "";
 
-            });
+                    element.classList.remove(
+                        "show"
+                    );
 
-        document.querySelectorAll(".input-box")
-            .forEach(box => {
-
-                box.classList.remove("input-error");
-                box.classList.remove("input-success");
-
-            });
-
-    }
-
-    function showError(input, errorElement, message) {
-
-        input.parentElement.classList.add("input-error");
-
-        errorElement.textContent = message;
-
-        errorElement.classList.add("show");
-
-    }
-
-    function showSuccess(input) {
-
-        input.parentElement.classList.remove("input-error");
-
-        input.parentElement.classList.add("input-success");
-
-    }
-
-    function validateEmail(value) {
-
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-
-    }
-
-    /* ==========================================
-       SUBMIT
-    ========================================== */
-
-    form.addEventListener("submit", async function (e) {
-
-        e.preventDefault();
-
-        clearErrors();
-
-        let valid = true;
-
-        /* Email */
-
-        if (!email.value.trim()) {
-
-            showError(
-                email,
-                emailError,
-                "Email is required."
+                }
             );
 
-            valid = false;
 
-        } else if (!validateEmail(email.value.trim())) {
+        document
+            .querySelectorAll(
+                ".input-box"
+            )
+            .forEach(
+                (box) => {
 
-            showError(
-                email,
-                emailError,
-                "Enter a valid email address."
+                    box.classList.remove(
+                        "input-error"
+                    );
+
+                    box.classList.remove(
+                        "input-success"
+                    );
+
+                }
             );
 
-            valid = false;
+    }
 
-        } else {
 
-            showSuccess(email);
+    /* ==========================================================
+       SHOW ERROR
+    ========================================================== */
+
+    function showError(
+        input,
+        errorElement,
+        message
+    ) {
+
+        if (input) {
+
+            input.parentElement.classList.add(
+                "input-error"
+            );
 
         }
 
-        /* Password */
 
-        if (!password.value.trim()) {
+        if (errorElement) {
 
-            showError(
-                password,
-                passwordError,
-                "Password is required."
+            errorElement.textContent =
+                message;
+
+            errorElement.classList.add(
+                "show"
             );
-
-            valid = false;
-
-        } else {
-
-            showSuccess(password);
 
         }
 
-        if (!valid) return;
+    }
 
-        /* Loading */
 
-        submitBtn.disabled = true;
+    /* ==========================================================
+       SHOW SUCCESS
+    ========================================================== */
+
+    function showSuccess(
+        input
+    ) {
+
+        if (!input) {
+            return;
+        }
+
+
+        input.parentElement.classList.remove(
+            "input-error"
+        );
+
+        input.parentElement.classList.add(
+            "input-success"
+        );
+
+    }
+
+
+    /* ==========================================================
+       EMAIL VALIDATION
+    ========================================================== */
+
+    function validateEmail(
+        value
+    ) {
+
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+            .test(value);
+
+    }
+
+
+    /* ==========================================================
+       RESET LOGIN BUTTON
+    ========================================================== */
+
+    function resetLoginButton() {
+
+        if (!submitBtn) {
+            return;
+        }
+
+
+        submitBtn.disabled =
+            false;
+
+
+        submitBtn.style.background =
+            "";
+
 
         submitBtn.innerHTML = `
-
-            <span class="spinner-border spinner-border-sm"></span>
-
-            Signing In...
-
+            <i class="bi bi-box-arrow-in-right"></i>
+            <span>Sign In</span>
         `;
 
-        try {
+    }
 
-            const response = await fetch("/api/auth/login", {
 
-                method: "POST",
+    /* ==========================================================
+       LOGIN
+    ========================================================== */
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+    form.addEventListener(
+        "submit",
+        async function (event) {
 
-                body: JSON.stringify({
+            event.preventDefault();
 
-                    email: email.value.trim().toLowerCase(),
 
-                    password: password.value
+            clearErrors();
 
-                })
 
-            });
+            let valid = true;
 
-            const data = await response.json();
 
-            // Login failed
-            if (!response.ok) {
+            /* --------------------------------------------------
+               EMAIL
+            -------------------------------------------------- */
 
-                passwordError.textContent =
-                    data.detail || "Incorrect email or password.";
+            const emailValue =
+                email.value
+                    .trim()
+                    .toLowerCase();
 
-                passwordError.classList.add("show");
 
-                password.parentElement.classList.add("input-error");
+            if (!emailValue) {
 
-                submitBtn.disabled = false;
+                showError(
+                    email,
+                    emailError,
+                    "Email is required."
+                );
+
+                valid = false;
+
+            }
+
+            else if (
+                !validateEmail(
+                    emailValue
+                )
+            ) {
+
+                showError(
+                    email,
+                    emailError,
+                    "Enter a valid email address."
+                );
+
+                valid = false;
+
+            }
+
+            else {
+
+                showSuccess(
+                    email
+                );
+
+            }
+
+
+            /* --------------------------------------------------
+               PASSWORD
+            -------------------------------------------------- */
+
+            const passwordValue =
+                password.value;
+
+
+            if (!passwordValue) {
+
+                showError(
+                    password,
+                    passwordError,
+                    "Password is required."
+                );
+
+                valid = false;
+
+            }
+
+            else {
+
+                showSuccess(
+                    password
+                );
+
+            }
+
+
+            if (!valid) {
+                return;
+            }
+
+
+            /* --------------------------------------------------
+               LOADING STATE
+            -------------------------------------------------- */
+
+            submitBtn.disabled =
+                true;
+
+
+            submitBtn.innerHTML = `
+                <span
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                ></span>
+                <span>Signing In...</span>
+            `;
+
+
+            try {
+
+                /* ==================================================
+                   IMPORTANT
+                   --------------------------------------------------
+                   Remove old/expired tokens before login.
+                ================================================== */
+
+                clearOldAuthentication();
+
+
+                /* ==================================================
+                   LOGIN REQUEST
+                ================================================== */
+
+                console.log(
+                    "[Login] Sending login request..."
+                );
+
+
+                const response =
+                    await fetch(
+                        "/api/auth/login",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json",
+
+                                "Accept":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    {
+                                        email:
+                                            emailValue,
+
+                                        password:
+                                            passwordValue
+                                    }
+                                )
+                        }
+                    );
+
+
+                /* ==================================================
+                   READ RESPONSE
+                ================================================== */
+
+                let data = null;
+
+
+                try {
+
+                    data =
+                        await response.json();
+
+                }
+
+                catch (jsonError) {
+
+                    console.error(
+                        "[Login] Invalid JSON response:",
+                        jsonError
+                    );
+
+                    throw new Error(
+                        "Invalid server response."
+                    );
+
+                }
+
+
+                console.log(
+                    "[Login] HTTP status:",
+                    response.status
+                );
+
+
+                /* ==================================================
+                   LOGIN ERROR
+                ================================================== */
+
+                if (!response.ok) {
+
+                    const message =
+                        data?.detail ||
+                        data?.message ||
+                        "Incorrect email or password.";
+
+
+                    showError(
+                        password,
+                        passwordError,
+                        message
+                    );
+
+
+                    resetLoginButton();
+
+
+                    return;
+
+                }
+
+
+                /* ==================================================
+                   CHECK ACCESS TOKEN
+                ================================================== */
+
+                const accessToken =
+                    data?.access_token;
+
+
+                if (!accessToken) {
+
+                    console.error(
+                        "[Login] Server response:",
+                        data
+                    );
+
+
+                    throw new Error(
+                        "Login successful, but the server did not return an access token."
+                    );
+
+                }
+
+
+                console.log(
+                    "[Login] Access token received."
+                );
+
+
+                /* ==================================================
+                   SAVE TOKEN
+                ================================================== */
+
+                saveAuthenticationToken(
+                    accessToken
+                );
+
+
+                /* ==================================================
+                   VERIFY TOKEN
+                   --------------------------------------------------
+                   This is important.
+
+                   The backend must accept the exact JWT that
+                   was returned from /api/auth/login.
+                ================================================== */
+
+                console.log(
+                    "[Login] Verifying authentication..."
+                );
+
+
+                const verifyResponse =
+                    await fetch(
+                        "/api/auth/me",
+                        {
+                            method: "GET",
+
+                            headers:
+                                getAuthHeaders()
+                        }
+                    );
+
+
+                let verifyData =
+                    null;
+
+
+                try {
+
+                    verifyData =
+                        await verifyResponse.json();
+
+                }
+
+                catch (verifyJsonError) {
+
+                    console.error(
+                        "[Login] Could not read /api/auth/me response:",
+                        verifyJsonError
+                    );
+
+                }
+
+
+                console.log(
+                    "[Login] /api/auth/me status:",
+                    verifyResponse.status
+                );
+
+
+                /* ==================================================
+                   TOKEN INVALID
+                ================================================== */
+
+                if (
+                    !verifyResponse.ok
+                ) {
+
+                    console.error(
+                        "[Login] Token verification failed:",
+                        verifyData
+                    );
+
+
+                    /*
+                     * Remove the token because the backend
+                     * rejected it.
+                     */
+
+                    clearOldAuthentication();
+
+
+                    throw new Error(
+                        verifyData?.detail ||
+                        "Authentication token was rejected by the server."
+                    );
+
+                }
+
+
+                /* ==================================================
+                   TOKEN VERIFIED
+                ================================================== */
+
+                console.log(
+                    "[Login] Authentication verified successfully."
+                );
+
+
+                console.log(
+                    "[Login] Current user:",
+                    verifyData
+                );
+
+
+                /* ==================================================
+                   SUCCESS UI
+                ================================================== */
 
                 submitBtn.innerHTML = `
-                    <i class="bi bi-box-arrow-in-right"></i>
-                    <span>Sign In</span>
+                    <i class="bi bi-check-circle-fill"></i>
+                    <span>Login Successful</span>
                 `;
 
-                return;
 
-            }
+                submitBtn.style.background =
+                    "#16A34A";
 
-            /* ==========================================================
-            SAVE JWT AUTHENTICATION TOKEN
-            ========================================================== */
 
-            if (!data.access_token) {
+                /* ==================================================
+                   REDIRECT
+                ================================================== */
 
-                throw new Error(
-                    "Login successful but access token was not returned."
+                setTimeout(
+                    () => {
+
+                        window.location.href =
+                            "/dashboard";
+
+                    },
+                    700
                 );
 
             }
 
+            catch (error) {
 
-            /* ==========================================================
-            REMOVE OLD TOKENS
-            ========================================================== */
-
-            localStorage.removeItem("access_token");
-            localStorage.removeItem("token");
-            localStorage.removeItem("auth_token");
-
-            sessionStorage.removeItem("access_token");
-            sessionStorage.removeItem("token");
-            sessionStorage.removeItem("auth_token");
-
-
-            /* ==========================================================
-            SAVE NEW TOKEN
-            ========================================================== */
-
-            if (rememberMe.checked) {
-
-                localStorage.setItem(
-                    "access_token",
-                    data.access_token
+                console.error(
+                    "[Login] Error:",
+                    error
                 );
 
-            } else {
 
-                sessionStorage.setItem(
-                    "access_token",
-                    data.access_token
+                /*
+                 * If authentication failed,
+                 * do not leave an invalid token.
+                 */
+
+                clearOldAuthentication();
+
+
+                let message =
+                    "Unable to connect to server.";
+
+
+                if (
+                    error &&
+                    error.message
+                ) {
+
+                    message =
+                        error.message;
+
+                }
+
+
+                showError(
+                    password,
+                    passwordError,
+                    message
                 );
+
+
+                resetLoginButton();
 
             }
-            
-            // Success UI
-            submitBtn.innerHTML = `
-                <i class="bi bi-check-circle-fill"></i>
-                <span>Login Successful</span>
-            `;
-
-            submitBtn.style.background = "#16A34A";
-
-            setTimeout(() => {
-
-                window.location.href = "/dashboard";
-
-            }, 1000);
 
         }
-        catch (error) {
-
-            console.error(error);
-
-            passwordError.textContent = "Unable to connect to server.";
-
-            passwordError.classList.add("show");
-
-            submitBtn.disabled = false;
-
-            submitBtn.innerHTML = `
-                <i class="bi bi-box-arrow-in-right"></i>
-                <span>Sign In</span>
-            `;
-
-        }
-    
-
-    }); // End form.addEventListener
+    );
 
 });
-
-
-window.onload = function () {
-
-    const passwordInput = document.getElementById("loginPassword");
-    const togglePassword = document.querySelector(".toggle-password");
-
-    if (!passwordInput || !togglePassword) return;
-
-    togglePassword.onclick = function () {
-
-        if (passwordInput.type === "password") {
-
-            passwordInput.type = "text";
-            this.querySelector("i").className = "bi bi-eye-slash-fill";
-
-        } else {
-
-            passwordInput.type = "password";
-            this.querySelector("i").className = "bi bi-eye-fill";
-
-        }
-
-    };
-
-};

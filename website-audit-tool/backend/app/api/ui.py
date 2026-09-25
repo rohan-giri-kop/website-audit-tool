@@ -76,7 +76,17 @@ def dashboard(request: Request):
         context={
             "page_title":"Dashboard"
         }
-    )    
+    )
+    
+@router.get("/audits", response_class=HTMLResponse)
+def audits_page(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="history.html",
+        context={
+            "page_title": "Website Audits"
+        }
+    )
     
 @router.get("/audits/new", response_class=HTMLResponse)
 def new_audit(request: Request):
@@ -100,6 +110,15 @@ def audit_report(request: Request, audit_id: int):
         }
     )
 
+@router.get("/reports", response_class=HTMLResponse)
+def reports(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="history.html",
+        context={
+            "page_title": "Reports"
+        }
+    )
 
 @router.get("/history", response_class=HTMLResponse)
 def history(request: Request):
